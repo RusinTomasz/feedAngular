@@ -1,17 +1,24 @@
-import { ThemeSharedModule } from './shared.module';
-import { AuthInterceptorService } from './auth/auth-interceptor.service';
-import { AuthModule } from './auth/auth.module';
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { environment } from '../environments/environment';
+
+import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+/* NgRx */
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
+/* Components */
+import { AppComponent } from './app.component';
+
+/* App modules */
+import { ThemeSharedModule } from './shared.module';
+import { AuthModule } from './auth/auth.module';
+import { HomepageModule } from './homepage/homepage.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,6 +38,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     HttpClientModule,
     //App modules
     AuthModule,
+    HomepageModule,
   ],
   providers: [
     {
