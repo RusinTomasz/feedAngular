@@ -1,0 +1,29 @@
+@import "src/scss/theme";
+
+:host {
+  .mat-toolbar {
+    background-color: white;
+    box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.1);
+    height: auto;
+    .logo-wrapper {
+      img {
+        width: 120px;
+      }
+    }
+    .search-wrapper {
+      a {
+        color: color(gray);
+      }
+    }
+  }
+  .main-nav {
+    padding: 0;
+    margin: 0;
+    .main-nav-item {
+      list-style: none;
+      .main-nav-item-link {
+        color: color(gray);
+      }
+    }
+  }
+}

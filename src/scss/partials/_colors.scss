@@ -1,0 +1,8 @@
+$colors: (
+  blue: #3659e3,
+  gray: #39364f,
+);
+
+@function color($color-name) {
+  @return map-get($colors, $color-name);
+}

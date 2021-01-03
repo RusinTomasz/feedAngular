@@ -1,0 +1,41 @@
+<mat-toolbar color="primary">
+  <div class="container">
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div
+        class="navbar-element"
+        fxLayout="row"
+        fxLayoutAlign="flex-start center"
+      >
+        <div class="logo-wrapper" fxLayout="row" fxLayoutAlign="center center">
+          <a [routerLink]="'/'" mat-button class="main-nav-item-link"
+            ><img
+              class="navbar-logo"
+              src="../../../../assets/images/logos/logo-gray.svg"
+          /></a>
+        </div>
+        <div class="search-wrapper">
+          <a class="main-nav-item-link" mat-button>Search...</a>
+        </div>
+      </div>
+      <div class="navbar-element">
+        <ul class="main-nav" fxLayout="row" fxLayoutAlign="flex-end center">
+          <li class="main-nav-item">
+            <a class="main-nav-item-link" [routerLink]="'/new-event'" mat-button
+              >Sklepy</a
+            >
+          </li>
+          <li *ngIf="!(authUser$ | async)" class="main-nav-item">
+            <a class="main-nav-item-link" [routerLink]="'/login'" mat-button
+              >Zaloguj się</a
+            >
+          </li>
+          <li *ngIf="authUser$ | async" class="main-nav-item">
+            <a class="main-nav-item-link" (click)="logout()" mat-button
+              >Wyloguj się</a
+            >
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</mat-toolbar>
