@@ -1,3 +1,4 @@
+import { ThemeSharedModule } from './../shared.module';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -13,6 +14,11 @@ const routes = [
 
 @NgModule({
   declarations: [HomepageComponent],
-  imports: [RouterModule.forChild(routes), CommonModule, LayoutModule],
+  imports: [
+    ThemeSharedModule,
+    RouterModule.forChild(routes),
+    CommonModule,
+    LayoutModule,
+  ],
 })
 export class HomepageModule {}

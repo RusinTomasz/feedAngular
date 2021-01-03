@@ -5,14 +5,17 @@
     background-color: white;
     box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.1);
     height: auto;
-    .logo-wrapper {
-      img {
-        width: 120px;
+    .navbar-wrapper {
+      width: 100%;
+      .logo-wrapper {
+        img {
+          width: 120px;
+        }
       }
-    }
-    .search-wrapper {
-      a {
-        color: color(gray);
+      .search-wrapper {
+        a {
+          color: color(gray);
+        }
       }
     }
   }

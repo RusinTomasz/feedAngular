@@ -1,8 +1,12 @@
 $colors: (
   blue: #3659e3,
+  blueDark: #3d64ff,
   gray: #39364f,
+  orange: #f05537,
+  orangeDark: #d1410c,
 );
 
 @function color($color-name) {
   @return map-get($colors, $color-name);
 }
+
