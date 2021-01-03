@@ -18,7 +18,6 @@ import { AppComponent } from './app.component';
 /* App modules */
 import { ThemeSharedModule } from './shared.module';
 import { AuthModule } from './auth/auth.module';
-import { HomepageModule } from './homepage/homepage.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -38,7 +37,6 @@ import { HomepageModule } from './homepage/homepage.module';
     HttpClientModule,
     //App modules
     AuthModule,
-    HomepageModule,
   ],
   providers: [
     {
