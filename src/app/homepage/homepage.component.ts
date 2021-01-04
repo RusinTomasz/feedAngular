@@ -1,4 +1,7 @@
+import { State } from './../state/app.state';
+import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';
+import { ProductPageActions } from '../product/state/actions';
 
 @Component({
   selector: 'app-homepage',
@@ -6,7 +9,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./homepage.component.scss'],
 })
 export class HomepageComponent implements OnInit {
-  constructor() {}
+  constructor(private store: Store<State>) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.store.dispatch(ProductPageActions.getProducts());
+  }
 }

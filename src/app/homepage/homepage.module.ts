@@ -1,3 +1,4 @@
+import { ProductModule } from './../product/product.module';
 import { ThemeSharedModule } from './../shared.module';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -19,6 +20,7 @@ const routes = [
     RouterModule.forChild(routes),
     CommonModule,
     LayoutModule,
+    ProductModule,
   ],
 })
 export class HomepageModule {}
