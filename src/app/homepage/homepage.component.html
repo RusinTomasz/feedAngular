@@ -1,5 +1,102 @@
 <app-navbar></app-navbar>
 <div class="container">
   <h2 class="home-page-subtitle">Wybrane produkty</h2>
+
+  <div
+    class="products-wrapper"
+    *ngIf="!(isLoading$ | async) && products$ | async as products"
+    fxLayout="row wrap"
+    fxLayoutAlign="space-between"
+  >
+    <div
+      class="product"
+      *ngFor="let product of products"
+      fxFlex="25"
+      fxLayout="column"
+      dir="ltr"
+      fxLayoutAlign="space-between flex-start"
+    >
+      <div class="product-top-section" fxFlex="100">
+        <div class="product-image-wrapper">
+          <img class="product-image" src="{{ product.imageLink }}" />
+        </div>
+        <h3 class="product-title">{{ product.title }}</h3>
+      </div>
+      <div
+        class="product-bottom-section"
+        fxLayout="row wrap"
+        fxLayoutAlign="space-between flex-end"
+        fxFlex="100"
+      >
+        <p class="product-price">{{ product.price }}</p>
+        <a
+          mat-raised-button
+          href="{{ product.productLink }}"
+          target="_blank"
+          color="accent"
+          class="product-link"
+          >Zobacz</a
+        >
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="skeleton-wrapper"
+    fxLayout="row wrap"
+    fxLayoutAlign="space-between"
+    *ngIf="!(products$ | async)?.length || (isLoading$ | async)"
+  >
+    <div
+      class="product product-skeleton"
+      fxFlex="25"
+      fxLayout="column"
+      dir="ltr"
+      fxLayoutAlign="space-between flex-start"
+      *ngFor="let number of numbers"
+    >
+      <div class="product-top-section" fxFlex="100">
+        <ngx-skeleton-loader
+          count="1"
+          [theme]="{
+            height: '180px'
+          }"
+          appearance="line"
+        ></ngx-skeleton-loader>
+        <ngx-skeleton-loader
+          count="1"
+          [theme]="{
+            height: '80px'
+          }"
+          appearance="line"
+        ></ngx-skeleton-loader>
+      </div>
+      <div
+        class="product-bottom-section"
+        fxLayout="row wrap"
+        fxLayoutAlign="space-between flex-end"
+        fxFlex="100"
+      >
+        <ngx-skeleton-loader
+          count="1"
+          [theme]="{
+            height: '36px',
+            width: '85px'
+          }"
+          appearance="line"
+        ></ngx-skeleton-loader>
+        <ngx-skeleton-loader
+          count="1"
+          [theme]="{
+            height: '36px',
+            width: '78px'
+          }"
+          appearance="line"
+        ></ngx-skeleton-loader>
+      </div>
+    </div>
+  </div>
+  <div class="homepage-pagination-wrapper">
+    <app-custom-pagination></app-custom-pagination>
+  </div>
 </div>
-<app-custom-pagination></app-custom-pagination>

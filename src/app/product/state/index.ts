@@ -9,6 +9,19 @@ export interface State extends AppState.State {
 // Selector functions
 const getProductFeatureState = createFeatureSelector<ProductState>('product');
 
+//products
+export const getProducts = createSelector(
+  getProductFeatureState,
+  (state) => state.products.rows
+);
+
+export const getPrductsLoadingStatus = createSelector(
+  getProductFeatureState,
+  (state) => state.isLoading
+);
+
+//Pagination
+
 export const getNextPage = createSelector(
   getProductFeatureState,
   (state) => state.products.nextPage
