@@ -1,0 +1,60 @@
+<!-- <p>Pagination</p>
+
+  <span class="align-self-center mb-1 mr-2 text-muted">
+    Shows {{ page.numberOfElements }} of {{ page.totalElements }}
+  </span> -->
+<div class="pagination-wrapper">
+  <p class="pagination-text">Elements per page:</p>
+  <div class="dropdown">
+    <mat-form-field appearance="fill">
+      <mat-select
+        [value]="pageSize$ | async"
+        (selectionChange)="updatePageSize($event.value)"
+      >
+        <mat-option [value]="option" *ngFor="let option of pageSizes">{{
+          option
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <a
+    *ngIf="prevPage$ | async"
+    [routerLink]=""
+    mat-button
+    class="btn btn-outline"
+    (click)="previousPage()"
+  >
+    <i class="material-icons">chevron_left</i>
+  </a>
+
+  <a
+    *ngIf="!(prevPage$ | async)"
+    [routerLink]=""
+    mat-button
+    class="btn btn-outline disabled"
+    (click)="preventDefault($event)"
+  >
+    <i class="material-icons">chevron_left</i>
+  </a>
+
+  <a
+    *ngIf="nextPage$ | async"
+    mat-button
+    [routerLink]=""
+    class="btn btn-outline"
+    (click)="nextPage()"
+  >
+    <i class="material-icons">chevron_right</i>
+  </a>
+
+  <a
+    *ngIf="!(nextPage$ | async)"
+    [routerLink]=""
+    mat-button
+    class="btn btn-outline disabled"
+    (click)="preventDefault($event)"
+  >
+    <i class="material-icons">chevron_right</i>
+  </a>
+</div>

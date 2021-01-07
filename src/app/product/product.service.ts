@@ -11,12 +11,18 @@ import { throwError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
+  private projectsUrl = 'http://localhost:8080/products';
+
   constructor(private http: HttpClient) {}
 
-  getProducts() {
-    return this.http
-      .get(`http://localhost:8080/products?page=1`)
-      .pipe(catchError(this.handleError));
+  getProducts(pageNumber: number = 1) {
+    //Get pageSize
+    console.log('currentPage: ' + pageNumber);
+    const pageSize = 16;
+
+    let url = this.projectsUrl + '?page=' + pageNumber + '&size=' + pageSize;
+
+    return this.http.get(url).pipe(catchError(this.handleError));
   }
 
   private handleError(errorRes: HttpErrorResponse) {

@@ -1,3 +1,4 @@
+import { CustomPaginationService } from './../pagination/services/custom-pagination.service';
 import { State } from './../state/app.state';
 import { Store } from '@ngrx/store';
 import { Component, OnInit } from '@angular/core';

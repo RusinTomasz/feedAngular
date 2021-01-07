@@ -1,0 +1,41 @@
+app-custom-pagination {
+  .pagination-wrapper {
+    display: flex;
+    align-items: center;
+    .pagination-text {
+      margin: 0 4px;
+    }
+  }
+  .btn {
+    display: inline-block;
+    padding: 0;
+    min-width: 34px;
+    .material-icons {
+      font-size: 28px;
+      color: rgba(0, 0, 0, 0.54);
+    }
+    &.disabled {
+      .material-icons {
+        color: rgba(0, 0, 0, 0.2);
+      }
+    }
+  }
+}
+
+.dropdown {
+  .mat-form-field {
+    margin: 6px 4px 0 4px;
+    width: 56px;
+    .mat-form-field-flex {
+      background-color: transparent;
+      padding: 0;
+      .mat-form-field-infix {
+        border-top: 0.84375em solid transparent;
+        padding: 0.4375em 0;
+        .mat-select-arrow-wrapper {
+          transform: translateY(0);
+        }
+      }
+    }
+  }
+}

@@ -7,9 +7,24 @@ export interface State extends AppState.State {
 }
 
 // Selector functions
-const getAuthFeatureState = createFeatureSelector<ProductState>('product');
+const getProductFeatureState = createFeatureSelector<ProductState>('product');
 
-// export const getLoginError = createSelector(
-//   getAuthFeatureState,
-//   (state) => state.errors.loginError
-// );
+export const getNextPage = createSelector(
+  getProductFeatureState,
+  (state) => state.products.nextPage
+);
+
+export const getPrevPage = createSelector(
+  getProductFeatureState,
+  (state) => state.products.prevPage
+);
+
+export const getCurrentPage = createSelector(
+  getProductFeatureState,
+  (state) => state.pagination.currentPage
+);
+
+export const getPageSize = createSelector(
+  getProductFeatureState,
+  (state) => state.pagination.pageSize
+);

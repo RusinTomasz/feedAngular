@@ -43,4 +43,28 @@ export class ProductEffects {
       )
     );
   });
+
+  nextPage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ProductPageActions.paginationProductPage),
+      concatMap((action) =>
+        this.productService.getProducts(action.pageNumber).pipe(
+          map((results: { products: ProductApiResponse }) => results.products),
+          tap((results: ProductApiResponse) => console.log(results)),
+          map((results: ProductApiResponse) =>
+            ProductApiActions.getPaginationProductPageSuccess({
+              count: results.count,
+              products: results.rows,
+              nextPage: results.nextPage,
+              prevPage: results.prevPage,
+              currentPage: action.pageNumber,
+            })
+          ),
+          catchError((error) =>
+            of(ProductApiActions.getProductsFailure({ error }))
+          )
+        )
+      )
+    );
+  });
 }

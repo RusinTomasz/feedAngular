@@ -17,6 +17,10 @@ export interface ProductState {
   errors?: {
     getProductsError?: string | null;
   };
+  pagination: {
+    currentPage: number;
+    pageSize: number;
+  };
   isLoading: boolean;
 }
 
@@ -27,6 +31,10 @@ const initialState: ProductState = {
   },
   errors: {
     getProductsError: '',
+  },
+  pagination: {
+    currentPage: 1,
+    pageSize: 16,
   },
   isLoading: false,
 };
@@ -65,6 +73,32 @@ export const productReducer = createReducer<ProductState>(
       return {
         ...state,
         errors: { ...state.errors, getProductsError: action.error },
+        isLoading: false,
+      };
+    }
+  ),
+  on(
+    ProductPageActions.paginationProductPage,
+    (state): ProductState => {
+      return {
+        ...state,
+        isLoading: true,
+      };
+    }
+  ),
+  on(
+    ProductApiActions.getPaginationProductPageSuccess,
+    (state, action): ProductState => {
+      return {
+        ...state,
+        products: {
+          count: action.count,
+          rows: action.products,
+          nextPage: action.nextPage,
+          prevPage: action.prevPage,
+        },
+        pagination: { ...state.pagination, currentPage: action.currentPage },
+        errors: { ...state.errors, getProductsError: '' },
         isLoading: false,
       };
     }
