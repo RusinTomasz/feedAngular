@@ -23,7 +23,6 @@ const routes = [
     ThemeSharedModule,
     NgxSkeletonLoaderModule,
     RouterModule.forChild(routes),
-    CommonModule,
     LayoutModule,
     ProductModule,
     MatSelectModule,
