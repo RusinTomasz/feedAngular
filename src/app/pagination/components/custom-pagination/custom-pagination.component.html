@@ -19,7 +19,8 @@
   </div>
 
   <a
-    *ngIf="prevPage$ | async"
+    *ngIf="(prevPage$ | async) && currentPage$ | async as currentPage"
+    [queryParams]="currentPage != 2 ? { page: +currentPage - 1 } : false"
     [routerLink]=""
     mat-button
     class="btn btn-outline"
@@ -39,9 +40,10 @@
   </a>
 
   <a
-    *ngIf="nextPage$ | async"
+    *ngIf="(nextPage$ | async) && currentPage$ | async as currentPage"
     mat-button
     [routerLink]=""
+    [queryParams]="{ page: +currentPage + 1 }"
     class="btn btn-outline"
     (click)="nextPage()"
   >
@@ -51,6 +53,7 @@
   <a
     *ngIf="!(nextPage$ | async)"
     [routerLink]=""
+    [queryParams]="{ page: (currentPage$ | async) }"
     mat-button
     class="btn btn-outline disabled"
     (click)="preventDefault($event)"

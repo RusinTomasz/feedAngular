@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 /*NgRx*/
@@ -23,7 +24,7 @@ export class HomepageComponent implements OnInit {
   isLoading$ = this.store.select(getPrductsLoadingStatus);
   products$ = this.store.select(getProducts);
   numbers: number[];
-  constructor(private store: Store<State>) {}
+  constructor(private store: Store<State>, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.store
@@ -36,6 +37,15 @@ export class HomepageComponent implements OnInit {
             .map((x, i) => i))
       );
 
-    this.store.dispatch(ProductPageActions.getProducts());
+    if (this.route.snapshot.queryParams['page']) {
+      const currentPaginatedPage = this.route.snapshot.queryParams['page'];
+      this.store.dispatch(
+        ProductPageActions.paginationProductPage({
+          pageNumber: currentPaginatedPage,
+        })
+      );
+    } else {
+      this.store.dispatch(ProductPageActions.getProducts());
+    }
   }
 }

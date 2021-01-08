@@ -44,11 +44,11 @@ export class ProductEffects {
     );
   });
 
-  nextPage$ = createEffect(() => {
+  getPaginationProductPage$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ProductPageActions.paginationProductPage),
       concatMap((action) =>
-        this.productService.getProducts(action.pageNumber).pipe(
+        this.productService.getProducts(+action.pageNumber).pipe(
           map((results: { products: ProductApiResponse }) => results.products),
           tap((results: ProductApiResponse) => console.log(results)),
           map((results: ProductApiResponse) =>
@@ -57,7 +57,7 @@ export class ProductEffects {
               products: results.rows,
               nextPage: results.nextPage,
               prevPage: results.prevPage,
-              currentPage: action.pageNumber,
+              currentPage: +action.pageNumber,
             })
           ),
           catchError((error) =>

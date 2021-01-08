@@ -45,7 +45,7 @@
     class="skeleton-wrapper"
     fxLayout="row wrap"
     fxLayoutAlign="space-between"
-    *ngIf="!(products$ | async)?.length || (isLoading$ | async)"
+    *ngIf="!(products$ | async)?.length && (isLoading$ | async)"
   >
     <div
       class="product product-skeleton"
