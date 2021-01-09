@@ -8,6 +8,12 @@ const routes: Routes = [
     loadChildren: () =>
       import('./homepage/homepage.module').then((m) => m.HomepageModule),
   },
+  {
+    path: 'szukaj',
+    pathMatch: 'full',
+    loadChildren: () =>
+      import('./search/search.module').then((m) => m.SearchModule),
+  },
 ];
 
 @NgModule({

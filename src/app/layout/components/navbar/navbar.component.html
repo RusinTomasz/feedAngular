@@ -16,8 +16,8 @@
             src="../../../../assets/images/logos/logo-gray.svg"
         /></a>
       </div>
-      <div class="search-wrapper">
-        <a class="main-nav-item-link" mat-button>Search...</a>
+      <div *ngIf="isHomepage" class="search-wrapper">
+        <app-search-bar></app-search-bar>
       </div>
     </div>
     <div class="navbar-element">

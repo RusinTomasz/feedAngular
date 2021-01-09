@@ -1,0 +1,33 @@
+@import "src/scss/theme";
+
+:host ::ng-deep .mat-list-base .mat-list-item .mat-list-item-content {
+  justify-content: space-between;
+}
+
+.side-bar {
+  min-width: 320px;
+  .filtr-panel-container {
+    position: fixed;
+    width: 320px;
+    height: calc(100vh - 56.56px);
+    //   height: calc(((100vh - 56.56px) - 344px));
+    bottom: 344px;
+    top: 56.56px;
+    background-color: color(backgroundGray);
+    .filter-panel-title {
+      padding-top: 46px;
+      padding-left: 15px;
+      font-size: 32px;
+      font-weight: 500;
+      color: #1e0a3c;
+      padding-bottom: 40px;
+      border-bottom: 2px solid #eeedf2;
+    }
+    .mat-list-item {
+      color: color(gray);
+      font-weight: 500;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+  }
+}

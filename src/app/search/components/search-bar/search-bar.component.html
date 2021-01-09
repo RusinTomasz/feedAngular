@@ -1,1 +1,23 @@
-<p>search-bar works!</p>
+<form
+  name="searchForm"
+  class="searchForm"
+  [formGroup]="searchForm"
+  (ngSubmit)="onSubmit()"
+>
+  <input
+    class="query-input"
+    formControlName="query"
+    placeholder="Wyszukaj produkt"
+  />
+
+  <div class="button-wrapper">
+    <button
+      mat-raised-button
+      color="accent"
+      class="submit-button"
+      aria-label="SEARCH"
+    >
+      Szukaj
+    </button>
+  </div>
+</form>

@@ -1,0 +1,12 @@
+@import "src/scss/theme";
+
+.search-page-wrapper {
+  display: flex;
+  .search-content {
+    padding-top: 40px;
+  }
+  .search-content {
+    width: calc(100% - 320px);
+    padding-left: 15px;
+  }
+}

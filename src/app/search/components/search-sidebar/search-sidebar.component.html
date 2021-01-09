@@ -1,1 +1,18 @@
-<p>search-sidebar works!</p>
+<aside class="side-bar">
+  <div class="filtr-panel-container">
+    <div *ngIf="activeFiltr" class="filtr-panel-active-filtr">
+      <app-search-filters></app-search-filters>
+    </div>
+    <div *ngIf="!activeFiltr" class="filtr-panel-init-view">
+      <h2 class="filter-panel-title">Filtry</h2>
+      <mat-action-list>
+        <button mat-list-item (click)="openFiltr('Sklep')">
+          Sklep <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+        <button mat-list-item (click)="openFiltr('Cena')">
+          Cena<mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+      </mat-action-list>
+    </div>
+  </div>
+</aside>

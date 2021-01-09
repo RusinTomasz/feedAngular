@@ -1,0 +1,30 @@
+@import "src/scss/theme";
+
+.searchForm {
+  display: flex;
+  align-items: flex-start;
+  padding: 8px 0;
+  margin-left: 20px;
+  .query-input {
+    background-color: color(backgroundGray);
+    color: #39364f;
+    outline: none;
+    border: none;
+    height: 36px;
+    padding: 10px 55px;
+    max-width: 472px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    background-size: 1.5rem;
+    background-position: 15px 50%;
+    background-repeat: no-repeat;
+    background-image: url("../../../../assets/images/svg/search.svg");
+    border-radius: 4px;
+  }
+  .submit-button {
+    margin-left: 20px;
+    background-color: color(orange);
+    box-shadow: none;
+  }
+}

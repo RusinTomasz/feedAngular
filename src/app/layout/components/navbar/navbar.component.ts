@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 import { State } from './../../../state/app.state';
 import { Component, OnInit } from '@angular/core';
 
@@ -12,12 +14,18 @@ import { getLoadingStatus } from './../../../auth/state/index';
 })
 export class NavbarComponent implements OnInit {
   authUser$ = this.store.select(getLoadingStatus);
+  isHomepage: boolean = false;
 
-  constructor(private store: Store<State>) {}
+  constructor(private store: Store<State>, private route: Router) {}
 
   logout() {
     // this.authService.logout();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    const currentUrlWithoutQueryParams = this.route.url.split('?')[0];
+    if (currentUrlWithoutQueryParams === '/') {
+      this.isHomepage = true;
+    }
+  }
 }

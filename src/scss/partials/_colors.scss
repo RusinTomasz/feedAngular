@@ -4,9 +4,9 @@ $colors: (
   gray: #39364f,
   orange: #f05537,
   orangeDark: #d1410c,
+  backgroundGray: #f8f7fa,
 );
 
 @function color($color-name) {
   @return map-get($colors, $color-name);
 }
-
