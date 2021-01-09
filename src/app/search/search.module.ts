@@ -1,17 +1,31 @@
-import { LayoutModule } from './../layout/layout.module';
 import { RouterModule } from '@angular/router';
+import { NgModule } from '@angular/core';
+
+/* Modules*/
+
+import { ThemeSharedModule } from './../shared.module';
+import { LayoutModule } from './../layout/layout.module';
 import { SearchBarModule } from './components/search-bar/search-bar.module';
+
+/* Material */
+
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatListModule } from '@angular/material/list';
 
-import { ThemeSharedModule } from './../shared.module';
-import { NgModule } from '@angular/core';
+/* Components */
+
 import { SearchPageComponent } from './components/search-page/search-page.component';
 import { SearchSidebarComponent } from './components/search-sidebar/search-sidebar.component';
 import { SearchFiltersComponent } from './components/search-filters/search-filters.component';
+
+/* NgRx */
+
+import { StoreModule } from '@ngrx/store';
+import { searchReducer } from './state/search.reducer';
+import { EffectsModule } from '@ngrx/effects';
 
 const routes = [
   {
@@ -21,17 +35,25 @@ const routes = [
 ];
 
 @NgModule({
-  declarations: [SearchPageComponent, SearchSidebarComponent, SearchFiltersComponent],
+  declarations: [
+    SearchPageComponent,
+    SearchSidebarComponent,
+    SearchFiltersComponent,
+  ],
   imports: [
-    ThemeSharedModule,
-    MatFormFieldModule,
     RouterModule.forChild(routes),
+    ThemeSharedModule,
     LayoutModule,
+    SearchBarModule,
+    //Material
+    MatFormFieldModule,
     MatIconModule,
     MatInputModule,
     MatButtonModule,
     MatListModule,
-    SearchBarModule,
+    //NgRx
+    StoreModule.forFeature('search', searchReducer),
+    // EffectsModule.forFeature([SearchEffects]),
   ],
 })
 export class SearchModule {}
