@@ -26,6 +26,8 @@ import { SearchFiltersComponent } from './components/search-filters/search-filte
 import { StoreModule } from '@ngrx/store';
 import { searchReducer } from './state/search.reducer';
 import { EffectsModule } from '@ngrx/effects';
+import { SearchFiltersPriceComponent } from './components/search-filters/search-filters-price/search-filters-price.component';
+import { SearchFiltersShopComponent } from './components/search-filters/search-filters-shop/search-filters-shop.component';
 
 const routes = [
   {
@@ -39,6 +41,8 @@ const routes = [
     SearchPageComponent,
     SearchSidebarComponent,
     SearchFiltersComponent,
+    SearchFiltersPriceComponent,
+    SearchFiltersShopComponent,
   ],
   imports: [
     RouterModule.forChild(routes),

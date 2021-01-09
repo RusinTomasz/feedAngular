@@ -5,20 +5,15 @@ import { SearchApiActions, SearchPageActions } from './actions';
 
 // State for this feature (search)
 export interface SearchState {
-  errors?: {
-    getProductsError?: string | null;
-  };
+  isActiveFilterSidenav: boolean;
 }
 
 const initialState: SearchState = {
-  errors: {
-    getProductsError: '',
-  },
+  isActiveFilterSidenav: false,
 };
 
 export const searchReducer = createReducer<SearchState>(
   initialState,
-
   on(
     SearchPageActions.getProducts,
     (state): SearchState => {
