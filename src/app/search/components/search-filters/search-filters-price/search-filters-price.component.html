@@ -1,1 +1,30 @@
 <h2 class="filter-panel-title">Cena</h2>
+<div class="filter-panel-wrapper">
+  <form
+    name="filterPriceForm"
+    class="filter-price-form"
+    [formGroup]="filterPriceForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <mat-form-field appearance="outline" class="example-form-field">
+      <mat-label>Od</mat-label>
+      <input matInput type="number" formControlName="priceFrom" />
+    </mat-form-field>
+    <span class="divider">-</span>
+    <mat-form-field appearance="outline" class="example-form-field">
+      <mat-label>Do</mat-label>
+      <input matInput type="number" formControlName="priceTo" />
+    </mat-form-field>
+
+    <div class="button-wrapper">
+      <button
+        mat-raised-button
+        color="primary"
+        class="submit-button"
+        aria-label="CONFIRM"
+      >
+        Zastosuj filtr
+      </button>
+    </div>
+  </form>
+</div>

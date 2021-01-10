@@ -21,14 +21,5 @@ export class SearchBarComponent implements OnInit {
     if (this.searchForm.status !== 'VALID') {
       return;
     }
-
-    console.log(this.searchForm.value.query);
-
-    // this.store.dispatch(
-    //   AuthPageActions.loginUser({
-    //     email: this.loginForm.value.email,
-    //     password: this.loginForm.value.password,
-    //   })
-    // );
   }
 }

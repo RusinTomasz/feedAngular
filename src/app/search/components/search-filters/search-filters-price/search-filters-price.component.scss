@@ -1,0 +1,23 @@
+@import "src/scss/theme";
+:host ::ng-deep {
+  .filter-panel-wrapper {
+    padding: 0 15px;
+    .filter-price-form {
+      .mat-form-field-wrapper {
+        .mat-form-field-infix {
+          width: 60px;
+        }
+      }
+      .divider {
+        display: inline-block;
+        margin: 0 10px;
+        font-size: 18px;
+      }
+      .button-wrapper {
+        .submit-button {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
