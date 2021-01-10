@@ -57,7 +57,7 @@ const routes = [
     MatListModule,
     //NgRx
     StoreModule.forFeature('search', searchReducer),
-    // EffectsModule.forFeature([SearchEffects]),
+    EffectsModule.forFeature([]),
   ],
 })
 export class SearchModule {}

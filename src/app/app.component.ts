@@ -1,3 +1,4 @@
+import { getDomainsNamesWithFeedsIds } from './domain/state/actions/domain-page.actions';
 import { Router } from '@angular/router';
 import { State } from './state/app.state';
 import { OnInit } from '@angular/core';
@@ -38,5 +39,7 @@ export class AppComponent implements OnInit {
       }
       this.store.dispatch(autoLogin({ userData: this.userData }));
     }
+
+    this.store.dispatch(getDomainsNamesWithFeedsIds());
   }
 }

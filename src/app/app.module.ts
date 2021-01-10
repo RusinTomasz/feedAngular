@@ -1,3 +1,5 @@
+import { domainReducer } from './domain/state/domain.reducer';
+
 import { LayoutModule } from './layout/layout.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -12,6 +14,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { EffectsModule } from '@ngrx/effects';
+import { DomainEffects } from './domain/state/domain.effects';
 
 /* Components */
 import { AppComponent } from './app.component';
@@ -29,12 +32,12 @@ import { AuthModule } from './auth/auth.module';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({ domain: domainReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([]),
+    EffectsModule.forRoot([DomainEffects]),
     HttpClientModule,
     //App modules
     AuthModule,
