@@ -1,12 +1,15 @@
 @import "src/scss/theme";
 
-.filter-panel-title {
-  padding-left: 15px;
-  font-size: 32px;
-  font-weight: 500;
-  color: #1e0a3c;
-  padding-bottom: 40px;
-  border-bottom: 2px solid #eeedf2;
+app-search-filters-price,
+app-search-filters-shop {
+  .filter-panel-title {
+    padding-left: 15px;
+    font-size: 32px;
+    font-weight: 500;
+    color: #1e0a3c;
+    padding-bottom: 40px;
+    border-bottom: 2px solid #eeedf2;
+  }
 }
 .filter-close {
   margin-top: 10px;

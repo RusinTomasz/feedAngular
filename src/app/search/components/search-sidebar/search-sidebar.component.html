@@ -1,15 +1,22 @@
 <aside class="side-bar">
   <div class="filtr-panel-container">
-    <div *ngIf="activeFiltr" class="filtr-panel-active-filtr">
+    <div
+      *ngIf="isFilterSidenavActive$ | async"
+      class="filtr-panel-active-filtr"
+    >
       <app-search-filters></app-search-filters>
     </div>
-    <div *ngIf="!activeFiltr" class="filtr-panel-init-view">
+
+    <div
+      *ngIf="!(isFilterSidenavActive$ | async)"
+      class="filtr-panel-init-view"
+    >
       <h2 class="filter-panel-title">Filtry</h2>
       <mat-action-list>
-        <button mat-list-item (click)="openFiltr('Sklep')">
+        <button mat-list-item (click)="openFiltr(availableFilters.shopFilter)">
           Sklep <mat-icon>keyboard_arrow_right</mat-icon>
         </button>
-        <button mat-list-item (click)="openFiltr('Cena')">
+        <button mat-list-item (click)="openFiltr(availableFilters.priceFilter)">
           Cena<mat-icon>keyboard_arrow_right</mat-icon>
         </button>
       </mat-action-list>

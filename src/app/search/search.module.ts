@@ -20,14 +20,14 @@ import { MatListModule } from '@angular/material/list';
 import { SearchPageComponent } from './components/search-page/search-page.component';
 import { SearchSidebarComponent } from './components/search-sidebar/search-sidebar.component';
 import { SearchFiltersComponent } from './components/search-filters/search-filters.component';
+import { SearchFiltersPriceComponent } from './components/search-filters/search-filters-price/search-filters-price.component';
+import { SearchFiltersShopComponent } from './components/search-filters/search-filters-shop/search-filters-shop.component';
 
 /* NgRx */
 
 import { StoreModule } from '@ngrx/store';
 import { searchReducer } from './state/search.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { SearchFiltersPriceComponent } from './components/search-filters/search-filters-price/search-filters-price.component';
-import { SearchFiltersShopComponent } from './components/search-filters/search-filters-shop/search-filters-shop.component';
 
 const routes = [
   {

@@ -9,8 +9,14 @@ export interface State extends AppState.State {
 // Selector functions
 const getSearchFeatureState = createFeatureSelector<SearchState>('search');
 
-//products
-// export const getProducts = createSelector(
-//     getSearchFeatureState,
-//   (state) => state.products.rows
-// );
+//filter sidenav
+
+export const getFilterSidenavStatus = createSelector(
+  getSearchFeatureState,
+  (state) => state.isActiveFilterSidenav
+);
+
+export const getCurrentlyOpenFilter = createSelector(
+  getSearchFeatureState,
+  (state) => state.currentlyOpenFilter
+);

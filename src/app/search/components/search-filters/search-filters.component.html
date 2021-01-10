@@ -1,4 +1,12 @@
 <div class="filter-close">
-  <button mat-button (click)="closeActiveFiltr()"><mat-icon>keyboard_arrow_left</mat-icon>Filtry</button>
+  <button mat-button (click)="deactivateFilterSidenav()">
+    <mat-icon>keyboard_arrow_left</mat-icon>Filtry
+  </button>
 </div>
-<h2 class="filter-panel-title">Cena</h2>
+
+<app-search-filters-shop
+  *ngIf="(currentlyOpenFilter$ | async) === availableFilters.shopFilter"
+></app-search-filters-shop>
+<app-search-filters-price
+  *ngIf="(currentlyOpenFilter$ | async) === availableFilters.priceFilter"
+></app-search-filters-price>

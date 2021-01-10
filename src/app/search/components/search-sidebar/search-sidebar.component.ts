@@ -1,4 +1,11 @@
+import { availableFilters } from './../search-filters/filters';
 import { Component, OnInit } from '@angular/core';
+
+/* NgRx*/
+import { Store } from '@ngrx/store';
+import { State } from './../../../state/app.state';
+import { getFilterSidenavStatus } from './../../state/index';
+import { SearchPageActions } from '../../state/actions';
 
 @Component({
   selector: 'app-search-sidebar',
@@ -6,17 +13,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./search-sidebar.component.scss'],
 })
 export class SearchSidebarComponent implements OnInit {
-  activeFiltr: string;
+  availableFilters = availableFilters;
 
-  constructor() {}
+  shopFilter = 'shop';
+
+  isFilterSidenavActive$ = this.store.select(getFilterSidenavStatus);
+
+  constructor(private store: Store<State>) {}
 
   ngOnInit(): void {}
 
-  openFiltr(type: string) {
-    this.activeFiltr = type;
-    console.log(type);
+  openFiltr(filtrType: string) {
+    this.store.dispatch(
+      SearchPageActions.activateFilterSidenav({
+        filtrType,
+      })
+    );
   }
-
-  
-
 }
