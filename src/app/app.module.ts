@@ -1,3 +1,4 @@
+import { SearchModule } from './search/search.module';
 import { domainReducer } from './domain/state/domain.reducer';
 
 import { LayoutModule } from './layout/layout.module';
@@ -41,6 +42,7 @@ import { AuthModule } from './auth/auth.module';
     HttpClientModule,
     //App modules
     AuthModule,
+    SearchModule,
   ],
   providers: [
     {
