@@ -32,36 +32,40 @@ export class SearchBarComponent implements OnInit, OnDestroy {
       query: '',
     });
 
-    //Check if currently in url is queryParam 'title' if not set queryTitle in state as empty string
-    if (this.activatedRoute.snapshot.queryParams['title']) {
-      const currentQueryTitle = this.activatedRoute.snapshot.queryParams[
-        'title'
-      ];
-      this.store.dispatch(
-        SearchPageActions.setQueryTitle({ title: currentQueryTitle })
-      );
-    } else {
-      this.store.dispatch(SearchPageActions.setQueryTitle({ title: '' }));
-    }
-
-    //Set default form query value based on state
-    this.subscription = this.currentlyQueryTitle$.subscribe(
-      (currentlyQueryTitle) => {
-        this.searchForm.controls['query'].setValue(currentlyQueryTitle, {
-          onlySelf: true,
-        });
-      }
-    );
-
     //Check if it is searchPage
     const currentUrlWithoutQueryParams = this.router.url.split('?')[0];
     if (currentUrlWithoutQueryParams === '/szukaj') {
       this.isSearchpage = true;
     }
+
+    if (this.isSearchpage) {
+      //Check if currently in url is queryParam 'title' if not set queryTitle in state as empty string
+      if (this.activatedRoute.snapshot.queryParams['title']) {
+        const currentQueryTitle = this.activatedRoute.snapshot.queryParams[
+          'title'
+        ];
+        this.store.dispatch(
+          SearchPageActions.setQueryTitle({ title: currentQueryTitle })
+        );
+      } else {
+        this.store.dispatch(SearchPageActions.setQueryTitle({ title: '' }));
+      }
+
+      //Set default form query value based on state
+      this.subscription = this.currentlyQueryTitle$.subscribe(
+        (currentlyQueryTitle) => {
+          this.searchForm.controls['query'].setValue(currentlyQueryTitle, {
+            onlySelf: true,
+          });
+        }
+      );
+    }
   }
 
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
   onSubmit() {
