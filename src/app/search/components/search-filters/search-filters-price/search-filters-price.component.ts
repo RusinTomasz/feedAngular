@@ -1,5 +1,11 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+/* NgRx */
+import { Store } from '@ngrx/store';
+import { State } from './../../../../state/app.state';
+import { SearchPageActions } from 'src/app/search/state/actions';
 
 @Component({
   selector: 'app-search-filters-price',
@@ -8,8 +14,13 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 })
 export class SearchFiltersPriceComponent implements OnInit {
   filterPriceForm: FormGroup;
-  value = 'Clear me';
-  constructor(private formBuilder: FormBuilder) {}
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private store: Store<State>,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.filterPriceForm = this.formBuilder.group({
@@ -23,13 +34,28 @@ export class SearchFiltersPriceComponent implements OnInit {
       return;
     }
 
-    // console.log(this.searchForm.value.query);
+    let priceFrom: number = this.filterPriceForm.value.priceFrom;
+    let priceTo: number = this.filterPriceForm.value.priceTo;
 
-    // this.store.dispatch(
-    //   AuthPageActions.loginUser({
-    //     email: this.loginForm.value.email,
-    //     password: this.loginForm.value.password,
-    //   })
-    // );
+    if (!priceFrom && priceTo) {
+      priceFrom = 0;
+    }
+
+    if (!priceTo && priceFrom) {
+      priceTo = 9999999;
+    } else if (priceTo < priceFrom) {
+      priceTo = priceFrom;
+    }
+
+    [
+      SearchPageActions.setPriceRange({ priceFrom, priceTo }),
+      SearchPageActions.dectivateFilterSidenav(),
+    ].forEach((a) => this.store.dispatch(a));
+
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: { priceFrom, priceTo },
+      queryParamsHandling: 'merge',
+    });
   }
 }

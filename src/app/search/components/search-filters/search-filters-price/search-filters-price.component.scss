@@ -3,17 +3,22 @@
   .filter-panel-wrapper {
     padding: 0 15px;
     .filter-price-form {
-      .mat-form-field-wrapper {
-        .mat-form-field-infix {
-          width: 60px;
+      .form-fields-inner-wrapper {
+        margin-top: 48px;
+        .mat-form-field-wrapper {
+          .mat-form-field-infix {
+            width: 60px;
+          }
+        }
+        .divider {
+          display: inline-block;
+          margin: 0 10px;
+          font-size: 18px;
         }
       }
-      .divider {
-        display: inline-block;
-        margin: 0 10px;
-        font-size: 18px;
-      }
+
       .button-wrapper {
+        margin-top: 30px;
         .submit-button {
           width: 100%;
         }

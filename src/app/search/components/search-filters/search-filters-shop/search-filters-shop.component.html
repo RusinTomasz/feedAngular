@@ -1,1 +1,34 @@
 <h2 class="filter-panel-title">Wybierz sklepy</h2>
+<div class="filter-panel-wrapper">
+  <form
+    name="filterShopForm"
+    class="filter-shop-form"
+    [formGroup]="filterShopForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <mat-selection-list
+      *ngIf="domains$ | async as domains"
+      formControlName="domains"
+    >
+      <mat-list-option
+        checkboxPosition="before"
+        class="mat-primary"
+        [value]="domain.id"
+        *ngFor="let domain of domains"
+      >
+        {{ domain.name }}
+      </mat-list-option>
+    </mat-selection-list>
+
+    <div class="button-wrapper">
+      <button
+        mat-raised-button
+        color="primary"
+        class="submit-button"
+        aria-label="CONFIRM"
+      >
+        Zastosuj filtr
+      </button>
+    </div>
+  </form>
+</div>

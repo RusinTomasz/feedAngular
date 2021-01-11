@@ -16,14 +16,14 @@ export class NavbarComponent implements OnInit {
   authUser$ = this.store.select(getLoadingStatus);
   isHomepage: boolean = false;
 
-  constructor(private store: Store<State>, private route: Router) {}
+  constructor(private store: Store<State>, private router: Router) {}
 
   logout() {
     // this.authService.logout();
   }
 
   ngOnInit(): void {
-    const currentUrlWithoutQueryParams = this.route.url.split('?')[0];
+    const currentUrlWithoutQueryParams = this.router.url.split('?')[0];
     if (currentUrlWithoutQueryParams === '/') {
       this.isHomepage = true;
     }

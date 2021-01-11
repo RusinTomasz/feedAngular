@@ -20,3 +20,10 @@ export const getCurrentlyOpenFilter = createSelector(
   getSearchFeatureState,
   (state) => state.currentlyOpenFilter
 );
+
+//ActiveFilters
+
+export const getCurrentlyQueryTitle = createSelector(
+  getSearchFeatureState,
+  (state) => state.filters.queryTitle
+);

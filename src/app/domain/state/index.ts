@@ -9,8 +9,7 @@ export interface State extends AppState.State {
 // Selector functions
 const getDomainFeatureState = createFeatureSelector<DomainState>('domain');
 
-
-// export const getFilterSidenavStatus = createSelector(
-//   getDomainFeatureState,
-//   (state) => state.isActiveFilterSidenav
-// );
+export const getDomains = createSelector(
+  getDomainFeatureState,
+  (state) => state.domains
+);

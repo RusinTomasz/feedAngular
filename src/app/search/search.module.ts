@@ -1,3 +1,4 @@
+import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
