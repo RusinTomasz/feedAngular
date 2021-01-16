@@ -13,11 +13,53 @@
     >
       <h2 class="filter-panel-title">Filtry</h2>
       <mat-action-list>
-        <button mat-list-item (click)="openFiltr(availableFilters.shopFilter)">
-          Sklep <mat-icon>keyboard_arrow_right</mat-icon>
+        <button
+          *ngIf="activeFilterShops$ | async as activeFilterShops"
+          mat-list-item
+          (click)="openFiltr(availableFilters.shopFilter)"
+          [ngClass]="{
+            'active-filter': activeFilterShops.shopsNames?.length
+          }"
+        >
+          <div class="filter-name-wrapper">
+            <span class="main-name">Sklep</span>
+            <div
+              class="active-shops-names"
+              *ngIf="activeFilterShops.shopsNames?.length"
+            >
+              <span
+                class="shop-name"
+                *ngFor="let shopName of activeFilterShops.shopsNames"
+                >{{ shopName | removeWhiteSpaces }}</span
+              >
+            </div>
+          </div>
+          <mat-icon>keyboard_arrow_right</mat-icon>
         </button>
-        <button mat-list-item (click)="openFiltr(availableFilters.priceFilter)">
-          Cena<mat-icon>keyboard_arrow_right</mat-icon>
+        <button
+          *ngIf="activeFilterPriceRange$ | async as activeFilterPriceRange"
+          mat-list-item
+          (click)="openFiltr(availableFilters.priceFilter)"
+          [ngClass]="{
+            'active-filter': activeFilterPriceRange.priceFrom !== null
+          }"
+        >
+          <div class="filter-name-wrapper">
+            <span class="main-name">Cena</span>
+            <div
+              class="price-range-values"
+              *ngIf="activeFilterPriceRange.priceFrom !== null"
+            >
+              <span class="price-range-value price-from"
+                >od {{ activeFilterPriceRange.priceFrom }} zł</span
+              >
+              <span class="price-separator">-</span>
+              <span class="price-range-value price-from"
+                >{{ activeFilterPriceRange.priceTo }} zł</span
+              >
+            </div>
+          </div>
+          <mat-icon>keyboard_arrow_right</mat-icon>
         </button>
       </mat-action-list>
     </div>

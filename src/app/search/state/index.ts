@@ -23,7 +23,22 @@ export const getCurrentlyOpenFilter = createSelector(
 
 //ActiveFilters
 
-export const getCurrentlyQueryTitle = createSelector(
+export const getCurrentlyActiveFilters = createSelector(
+  getSearchFeatureState,
+  (state) => state.filters
+);
+
+export const getCurrentlyActiveQueryTitle = createSelector(
   getSearchFeatureState,
   (state) => state.filters.queryTitle
+);
+
+export const getCurrentlyActivePriceRange = createSelector(
+  getSearchFeatureState,
+  (state) => state.filters.priceRange
+);
+
+export const getCurrentlyActiveShops = createSelector(
+  getSearchFeatureState,
+  (state) => state.filters.shops
 );

@@ -13,7 +13,8 @@
       <mat-list-option
         checkboxPosition="before"
         class="mat-primary"
-        [value]="domain.id"
+        [value]="domain"
+        [selected]="(activeFilterShops$ | async).shopsId?.includes(domain.id)"
         *ngFor="let domain of domains"
       >
         {{ domain.name }}

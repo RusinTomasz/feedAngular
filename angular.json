@@ -125,5 +125,8 @@
       }
     }
   },
-  "defaultProject": "angular-ngrx-auth"
+  "defaultProject": "angular-ngrx-auth",
+  "cli": {
+    "analytics": "b35f7081-7b57-4924-be54-55f47f0a7ee0"
+  }
 }

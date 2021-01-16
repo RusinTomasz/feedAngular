@@ -5,8 +5,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 /* NgRx */
 import { State } from './../../../state/app.state';
 import { Store } from '@ngrx/store';
-import { SearchPageActions } from 'src/app/search/state/actions';
-import { getCurrentlyQueryTitle } from './../../state/index';
+import {
+  setQueryTitle,
+  searchProducts,
+} from './../../state/actions/search-page.actions';
+import { getCurrentlyActiveQueryTitle } from './../../state/index';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -18,7 +21,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   searchForm: FormGroup;
   subscription: Subscription;
   isSearchpage: boolean = false;
-  currentlyQueryTitle$ = this.store.select(getCurrentlyQueryTitle);
+  currentlyQueryTitle$ = this.store.select(getCurrentlyActiveQueryTitle);
 
   constructor(
     private formBuilder: FormBuilder,
@@ -44,11 +47,9 @@ export class SearchBarComponent implements OnInit, OnDestroy {
         const currentQueryTitle = this.activatedRoute.snapshot.queryParams[
           'title'
         ];
-        this.store.dispatch(
-          SearchPageActions.setQueryTitle({ title: currentQueryTitle })
-        );
+        this.store.dispatch(setQueryTitle({ title: currentQueryTitle }));
       } else {
-        this.store.dispatch(SearchPageActions.setQueryTitle({ title: '' }));
+        this.store.dispatch(setQueryTitle({ title: '' }));
       }
 
       //Set default form query value based on state
@@ -74,7 +75,10 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     }
 
     const queryTitle = this.searchForm.value.query;
-    this.store.dispatch(SearchPageActions.setQueryTitle({ title: queryTitle }));
+
+    [setQueryTitle({ title: queryTitle }), searchProducts()].forEach((a) =>
+      this.store.dispatch(a)
+    );
 
     if (this.isSearchpage) {
       this.router.navigate([], {

@@ -7,7 +7,7 @@ export const getDomainsNamesWithFeedsIdsSuccess = createAction(
     domains: {
       id: number;
       name: string;
-      feeds?: { id: string }[];
+      feeds?: { id: number }[];
     }[];
   }>()
 );

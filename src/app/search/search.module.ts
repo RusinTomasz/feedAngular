@@ -1,4 +1,4 @@
-import { SearchBarComponent } from './components/search-bar/search-bar.component';
+import { RemoveWhiteSpaces } from './../pipes/removeWhiteSpaces.pipe';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
@@ -29,6 +29,7 @@ import { SearchFiltersShopComponent } from './components/search-filters/search-f
 import { StoreModule } from '@ngrx/store';
 import { searchReducer } from './state/search.reducer';
 import { EffectsModule } from '@ngrx/effects';
+import { SearchEffects } from './state/search.effects';
 
 const routes = [
   {
@@ -44,6 +45,7 @@ const routes = [
     SearchFiltersComponent,
     SearchFiltersPriceComponent,
     SearchFiltersShopComponent,
+    RemoveWhiteSpaces,
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -58,7 +60,7 @@ const routes = [
     MatListModule,
     //NgRx
     StoreModule.forFeature('search', searchReducer),
-    EffectsModule.forFeature([]),
+    EffectsModule.forFeature([SearchEffects]),
   ],
 })
 export class SearchModule {}

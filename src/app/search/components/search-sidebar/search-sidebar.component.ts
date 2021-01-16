@@ -4,7 +4,11 @@ import { Component, OnInit } from '@angular/core';
 /* NgRx*/
 import { Store } from '@ngrx/store';
 import { State } from './../../../state/app.state';
-import { getFilterSidenavStatus } from './../../state/index';
+import {
+  getFilterSidenavStatus,
+  getCurrentlyActivePriceRange,
+  getCurrentlyActiveShops,
+} from './../../state/index';
 import { SearchPageActions } from '../../state/actions';
 
 @Component({
@@ -18,6 +22,8 @@ export class SearchSidebarComponent implements OnInit {
   shopFilter = 'shop';
 
   isFilterSidenavActive$ = this.store.select(getFilterSidenavStatus);
+  activeFilterPriceRange$ = this.store.select(getCurrentlyActivePriceRange);
+  activeFilterShops$ = this.store.select(getCurrentlyActiveShops);
 
   constructor(private store: Store<State>) {}
 

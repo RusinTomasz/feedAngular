@@ -1,19 +1,29 @@
+import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 /* NgRx */
 import { Store } from '@ngrx/store';
 import { State } from './../../../../state/app.state';
-import { SearchPageActions } from 'src/app/search/state/actions';
+import {
+  searchProducts,
+  dectivateFilterSidenav,
+  setPriceRange,
+} from './../../../state/actions/search-page.actions';
+import { getCurrentlyActivePriceRange } from './../../../state/index';
 
 @Component({
   selector: 'app-search-filters-price',
   templateUrl: './search-filters-price.component.html',
   styleUrls: ['./search-filters-price.component.scss'],
 })
-export class SearchFiltersPriceComponent implements OnInit {
+export class SearchFiltersPriceComponent implements OnInit, OnDestroy {
   filterPriceForm: FormGroup;
+
+  activeFilterPriceRange$ = this.store.select(getCurrentlyActivePriceRange);
+
+  activeFilterPriceRange: Subscription;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,6 +37,24 @@ export class SearchFiltersPriceComponent implements OnInit {
       priceFrom: null,
       priceTo: null,
     });
+
+    this.activeFilterPriceRange = this.activeFilterPriceRange$.subscribe(
+      (priceRange) => {
+        this.filterPriceForm.controls['priceFrom'].setValue(
+          priceRange.priceFrom,
+          {
+            onlySelf: true,
+          }
+        );
+        this.filterPriceForm.controls['priceTo'].setValue(priceRange.priceTo, {
+          onlySelf: true,
+        });
+      }
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.activeFilterPriceRange.unsubscribe();
   }
 
   onSubmit() {
@@ -48,8 +76,9 @@ export class SearchFiltersPriceComponent implements OnInit {
     }
 
     [
-      SearchPageActions.setPriceRange({ priceFrom, priceTo }),
-      SearchPageActions.dectivateFilterSidenav(),
+      setPriceRange({ priceFrom, priceTo }),
+      dectivateFilterSidenav(),
+      searchProducts(),
     ].forEach((a) => this.store.dispatch(a));
 
     this.router.navigate([], {

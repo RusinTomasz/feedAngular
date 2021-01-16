@@ -8,7 +8,7 @@ export interface DomainState {
   domains?: {
     id: number;
     name: string;
-    feeds?: { id: string }[];
+    feeds?: { id: number }[];
   }[];
   errors?: {
     getDomainsError?: string | null;

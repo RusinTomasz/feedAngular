@@ -8,10 +8,22 @@ export interface SearchState {
   isActiveFilterSidenav: boolean;
   currentlyOpenFilter: string;
   filters: {
-    selectedShops?: number[];
+    shops?: {
+      shopsId?: number[];
+      shopsNames?: string[];
+      shopsFeedsId?: number[];
+    };
     priceRange?: { priceFrom: number; priceTo: number };
     queryTitle: string;
   };
+  errors?: {
+    searchProductsError?: string | null;
+  };
+  pagination: {
+    currentPage: number;
+    pageSize: number;
+  };
+  isLoading: boolean;
 }
 
 const initialState: SearchState = {
@@ -19,7 +31,18 @@ const initialState: SearchState = {
   currentlyOpenFilter: '',
   filters: {
     queryTitle: '',
+    shops: {
+      shopsId: [],
+      shopsNames: [],
+      shopsFeedsId: [],
+    },
+    priceRange: { priceFrom: null, priceTo: null },
   },
+  pagination: {
+    currentPage: 1,
+    pageSize: 16,
+  },
+  isLoading: false,
 };
 
 export const searchReducer = createReducer<SearchState>(
@@ -43,28 +66,32 @@ export const searchReducer = createReducer<SearchState>(
       };
     }
   ),
+
+  on(
+    SearchPageActions.setSearchFeedsId,
+    (state, action): SearchState => {
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          shops: { shopsFeedsId: action.shopsFeedsId },
+        },
+      };
+    }
+  ),
   on(
     SearchPageActions.setActiveShops,
     (state, action): SearchState => {
       return {
         ...state,
-        filters: { ...state.filters, selectedShops: action.shops },
-      };
-    }
-  ),
-  on(
-    SearchApiActions.setActiveShopsSuccess,
-    (state): SearchState => {
-      return {
-        ...state,
-      };
-    }
-  ),
-  on(
-    SearchApiActions.setActiveShopsFailure,
-    (state): SearchState => {
-      return {
-        ...state,
+        filters: {
+          ...state.filters,
+          shops: {
+            shopsId: action.shopsId,
+            shopsNames: action.shopsNames,
+            shopsFeedsId: action.shopsFeedsId,
+          },
+        },
       };
     }
   ),
@@ -81,22 +108,6 @@ export const searchReducer = createReducer<SearchState>(
     }
   ),
   on(
-    SearchApiActions.setPriceRangeSuccess,
-    (state): SearchState => {
-      return {
-        ...state,
-      };
-    }
-  ),
-  on(
-    SearchApiActions.setPriceRangeFailure,
-    (state): SearchState => {
-      return {
-        ...state,
-      };
-    }
-  ),
-  on(
     SearchPageActions.setQueryTitle,
     (state, action): SearchState => {
       return {
@@ -109,7 +120,7 @@ export const searchReducer = createReducer<SearchState>(
     }
   ),
   on(
-    SearchApiActions.setQueryTitleSuccess,
+    SearchPageActions.searchProducts,
     (state): SearchState => {
       return {
         ...state,
@@ -117,10 +128,20 @@ export const searchReducer = createReducer<SearchState>(
     }
   ),
   on(
-    SearchApiActions.setQueryTitleFailure,
+    SearchApiActions.searchProductsSuccess,
     (state): SearchState => {
       return {
         ...state,
+      };
+    }
+  ),
+  on(
+    SearchApiActions.searchProductsFailure,
+    (state, action): SearchState => {
+      return {
+        ...state,
+        errors: { ...state.errors, searchProductsError: action.error },
+        isLoading: false,
       };
     }
   )

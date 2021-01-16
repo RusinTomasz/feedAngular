@@ -26,7 +26,6 @@ export class DomainEffects {
       ofType(DomainPageActions.getDomainsNamesWithFeedsIds),
       concatMap(() =>
         this.domainService.getDomainsNamesWithFeedsIds().pipe(
-          tap((results: DomainApiResponse) => console.log(results)),
           map((results: DomainApiResponse) =>
             DomainApiActions.getDomainsNamesWithFeedsIdsSuccess({
               domains: results.domains,

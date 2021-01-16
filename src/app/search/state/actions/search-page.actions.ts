@@ -16,7 +16,18 @@ export const dectivateFilterSidenav = createAction(
 
 export const setActiveShops = createAction(
   '[Search Page] Set Active Shops',
-  props<{ shops: number[] }>()
+  props<{
+    shopsId: number[];
+    shopsNames: string[];
+    shopsFeedsId: number[];
+  }>()
+);
+
+export const setSearchFeedsId = createAction(
+  '[Search Page] Set Active Shops',
+  props<{
+    shopsFeedsId: number[];
+  }>()
 );
 
 export const setPriceRange = createAction(
@@ -28,3 +39,7 @@ export const setQueryTitle = createAction(
   '[Search Page] Set Query Title',
   props<{ title: string }>()
 );
+
+/* Search products */
+
+export const searchProducts = createAction('[Search Page] Search Products');
