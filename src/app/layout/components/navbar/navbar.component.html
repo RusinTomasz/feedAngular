@@ -1,4 +1,9 @@
-<mat-toolbar color="primary">
+<mat-toolbar
+  color="primary"
+  [ngClass]="{
+    'nav-bar-subpage': !isHomepage
+  }"
+>
   <div
     fxLayout="row"
     fxLayoutAlign="space-between center"

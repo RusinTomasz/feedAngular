@@ -5,6 +5,13 @@
     background-color: white;
     box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.1);
     height: auto;
+    z-index: 99;
+    &.nav-bar-subpage {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
     .navbar-wrapper {
       width: 100%;
       .logo-wrapper {
