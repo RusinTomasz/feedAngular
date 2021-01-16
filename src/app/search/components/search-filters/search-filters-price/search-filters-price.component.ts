@@ -57,8 +57,32 @@ export class SearchFiltersPriceComponent implements OnInit, OnDestroy {
     this.activeFilterPriceRange.unsubscribe();
   }
 
+  resetFilter(): void {
+    this.filterPriceForm.reset();
+
+    const priceFrom = null;
+    const priceTo = null;
+
+    [
+      setPriceRange({ priceFrom, priceTo }),
+      dectivateFilterSidenav(),
+      searchProducts(),
+    ].forEach((a) => this.store.dispatch(a));
+
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: { priceFrom, priceTo },
+      queryParamsHandling: 'merge',
+    });
+  }
+
   onSubmit() {
     if (this.filterPriceForm.status !== 'VALID') {
+      return;
+    }
+
+    if (!this.filterPriceForm.touched) {
+      this.store.dispatch(dectivateFilterSidenav());
       return;
     }
 

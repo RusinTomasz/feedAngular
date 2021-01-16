@@ -37,10 +37,39 @@ export class SearchFiltersShopComponent implements OnInit {
     });
   }
 
+  resetFilter(): void {
+    this.filterShopForm.reset();
+
+    [
+      setActiveShops({
+        shopsId: [],
+        shopsNames: [],
+        shopsFeedsId: [],
+      }),
+      dectivateFilterSidenav(),
+      searchProducts(),
+    ].forEach((a) => this.store.dispatch(a));
+
+    const queryParams: any = { shops: null };
+
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: queryParams,
+      queryParamsHandling: 'merge',
+    });
+  }
+
   onSubmit() {
     if (this.filterShopForm.status !== 'VALID') {
       return;
     }
+
+    if (!this.filterShopForm.touched) {
+      this.store.dispatch(dectivateFilterSidenav());
+      return;
+    }
+
+    console.log(this.filterShopForm);
 
     const shopsArray: {
       id: number;

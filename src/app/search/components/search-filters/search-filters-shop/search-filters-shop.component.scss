@@ -3,18 +3,20 @@
 ::ng-deep .filter-shop-form .mat-pseudo-checkbox-checked {
   background: color(blue);
 }
-
-.filter-shop-form {
-  .mat-selection-list {
-    .mat-list-item {
-      margin: 0 0 5px;
+.filter-panel-wrapper {
+  padding: 0 15px;
+  .filter-shop-form {
+    .mat-selection-list {
+      margin-top: 20px;
+      .mat-list-item {
+        margin: 0 0 5px;
+      }
     }
-  }
-  .button-wrapper {
-    margin-top: 30px;
-    padding: 0 15px;
-    .submit-button {
-      width: 100%;
+    .button-wrapper {
+      margin-top: 30px;
+      .submit-button {
+        width: 100%;
+      }
     }
   }
 }
