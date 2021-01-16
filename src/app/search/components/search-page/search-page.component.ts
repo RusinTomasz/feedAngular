@@ -1,5 +1,6 @@
+import { take } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
-import { Component, OnInit } from '@angular/core'; /* NgRx */
+import { Component, OnInit } from '@angular/core';
 
 /* NgRx */
 import { State } from './../../../state/app.state';
@@ -11,7 +12,11 @@ import {
   searchProducts,
 } from './../../state/actions/search-page.actions';
 import { getDomains } from './../../../domain/state/index';
-import { SearchPageActions } from 'src/app/search/state/actions';
+import {
+  getSearchLoadingStatus,
+  getSearchProducts,
+  getSearchPageSize,
+} from './../../state/index';
 
 @Component({
   selector: 'app-search-page',
@@ -19,9 +24,23 @@ import { SearchPageActions } from 'src/app/search/state/actions';
   styleUrls: ['./search-page.component.scss'],
 })
 export class SearchPageComponent implements OnInit {
+  isLoading$ = this.store.select(getSearchLoadingStatus);
+  products$ = this.store.select(getSearchProducts);
+  numbers: number[];
+
   constructor(private store: Store<State>, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.store
+      .select(getSearchPageSize)
+      .pipe(take(1))
+      .subscribe(
+        (pageSize) =>
+          (this.numbers = Array(pageSize)
+            .fill(0)
+            .map((x, i) => i))
+      );
+
     if (this.route.snapshot.queryParams['page']) {
       // this.searchQueryParams.currentPaginatedPage = this.route.snapshot.queryParams[
       //   'page'

@@ -3,10 +3,44 @@
 .search-page-wrapper {
   display: flex;
   .search-content {
-    padding-top: 40px;
-  }
-  .search-content {
     width: calc(100% - 320px);
     padding-left: 15px;
+    padding-top: 40px;
+    .search-page-subtitle {
+      margin-top: 30px;
+      font-size: 32px;
+      font-weight: 500;
+      color: #1e0a3c;
+    }
+    .products-wrapper,
+    .skeleton-wrapper {
+      .product {
+        padding: 25px;
+        .product-top-section {
+          width: 100%;
+        }
+        .product-title {
+          color: color(gray);
+          font-weight: 500;
+          margin-top: 20px;
+        }
+        .product-image-wrapper {
+          .product-image {
+            margin: auto;
+            max-width: 100%;
+            display: block;
+          }
+        }
+        .product-bottom-section {
+          width: 100%;
+        }
+        .product-price {
+          color: color(orangeDark);
+          font-weight: 500;
+          font-size: 18px;
+          margin: 0 0 8px;
+        }
+      }
+    }
   }
 }

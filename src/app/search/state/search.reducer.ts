@@ -1,3 +1,4 @@
+import { Product } from './../../product/product';
 /* NgRx */
 import { createReducer, on } from '@ngrx/store';
 
@@ -7,6 +8,12 @@ import { SearchApiActions, SearchPageActions } from './actions';
 export interface SearchState {
   isActiveFilterSidenav: boolean;
   currentlyOpenFilter: string;
+  products: {
+    count: number;
+    rows: Product[];
+    nextPage?: { page: number; limit: number };
+    prevPage?: { page: number; limit: number };
+  };
   filters: {
     shops?: {
       shopsId?: number[];
@@ -29,6 +36,10 @@ export interface SearchState {
 const initialState: SearchState = {
   isActiveFilterSidenav: false,
   currentlyOpenFilter: '',
+  products: {
+    count: 0,
+    rows: [],
+  },
   filters: {
     queryTitle: '',
     shops: {
@@ -124,14 +135,23 @@ export const searchReducer = createReducer<SearchState>(
     (state): SearchState => {
       return {
         ...state,
+        isLoading: true,
       };
     }
   ),
   on(
     SearchApiActions.searchProductsSuccess,
-    (state): SearchState => {
+    (state, action): SearchState => {
       return {
         ...state,
+        products: {
+          count: action.count,
+          rows: action.products,
+          nextPage: action.nextPage,
+          prevPage: action.prevPage,
+        },
+        errors: { ...state.errors, searchProductsError: '' },
+        isLoading: false,
       };
     }
   ),

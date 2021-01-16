@@ -1,3 +1,4 @@
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { RemoveWhiteSpaces } from './../pipes/removeWhiteSpaces.pipe';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
@@ -7,6 +8,7 @@ import { NgModule } from '@angular/core';
 import { ThemeSharedModule } from './../shared.module';
 import { LayoutModule } from './../layout/layout.module';
 import { SearchBarModule } from './components/search-bar/search-bar.module';
+import { PaginationModule } from './../pagination/pagination.module';
 
 /* Material */
 
@@ -51,7 +53,9 @@ const routes = [
     RouterModule.forChild(routes),
     ThemeSharedModule,
     LayoutModule,
+    PaginationModule,
     SearchBarModule,
+    NgxSkeletonLoaderModule,
     //Material
     MatFormFieldModule,
     MatIconModule,

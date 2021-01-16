@@ -1,9 +1,8 @@
-import { CustomPaginationComponent } from './../pagination/components/custom-pagination/custom-pagination.component';
+import { PaginationModule } from './../pagination/pagination.module';
 import { ProductModule } from './../product/product.module';
 import { ThemeSharedModule } from './../shared.module';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { HomepageComponent } from './homepage.component';
 import { LayoutModule } from './../layout/layout.module';
 import { MatSelectModule } from '@angular/material/select';
@@ -18,7 +17,7 @@ const routes = [
 ];
 
 @NgModule({
-  declarations: [HomepageComponent, CustomPaginationComponent],
+  declarations: [HomepageComponent],
   imports: [
     ThemeSharedModule,
     NgxSkeletonLoaderModule,
@@ -27,6 +26,7 @@ const routes = [
     ProductModule,
     MatSelectModule,
     MatButtonModule,
+    PaginationModule,
   ],
 })
 export class HomepageModule {}

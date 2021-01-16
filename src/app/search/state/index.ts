@@ -9,6 +9,12 @@ export interface State extends AppState.State {
 // Selector functions
 const getSearchFeatureState = createFeatureSelector<SearchState>('search');
 
+//searched products
+export const getSearchProducts = createSelector(
+  getSearchFeatureState,
+  (state) => state.products.rows
+);
+
 //filter sidenav
 
 export const getFilterSidenavStatus = createSelector(
@@ -41,4 +47,33 @@ export const getCurrentlyActivePriceRange = createSelector(
 export const getCurrentlyActiveShops = createSelector(
   getSearchFeatureState,
   (state) => state.filters.shops
+);
+
+//Loading Status
+
+export const getSearchLoadingStatus = createSelector(
+  getSearchFeatureState,
+  (state) => state.isLoading
+);
+
+//Pagination
+
+export const getSearchNextPage = createSelector(
+  getSearchFeatureState,
+  (state) => state.products.nextPage
+);
+
+export const getSearchPrevPage = createSelector(
+  getSearchFeatureState,
+  (state) => state.products.prevPage
+);
+
+export const getSearchCurrentPage = createSelector(
+  getSearchFeatureState,
+  (state) => state.pagination.currentPage
+);
+
+export const getSearchPageSize = createSelector(
+  getSearchFeatureState,
+  (state) => state.pagination.pageSize
 );
