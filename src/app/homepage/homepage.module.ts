@@ -1,3 +1,4 @@
+import { SharedPipesModule } from './../pipes/sharedPipes.module';
 import { PaginationModule } from './../pagination/pagination.module';
 import { ProductModule } from './../product/product.module';
 import { ThemeSharedModule } from './../shared.module';
@@ -20,6 +21,7 @@ const routes = [
   declarations: [HomepageComponent],
   imports: [
     ThemeSharedModule,
+    SharedPipesModule,
     NgxSkeletonLoaderModule,
     RouterModule.forChild(routes),
     LayoutModule,

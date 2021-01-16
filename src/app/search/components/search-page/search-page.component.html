@@ -33,7 +33,7 @@
               fxLayoutAlign="space-between flex-end"
               fxFlex="100"
             >
-              <p class="product-price">{{ product.price }}</p>
+              <p class="product-price">{{ product.price | twoDigits }} ZŁ</p>
               <a
                 mat-raised-button
                 href="{{ product.productLink }}"
