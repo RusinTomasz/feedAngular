@@ -30,6 +30,8 @@ export class NavbarComponent implements OnInit {
   }
 
   goToFrontPage(): void {
-    this.store.dispatch(paginationProductPage());
+    if (this.isHomepage) {
+      this.store.dispatch(paginationProductPage());
+    }
   }
 }

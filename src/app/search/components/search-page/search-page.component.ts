@@ -101,6 +101,7 @@ export class SearchPageComponent implements OnInit {
               shopsFeedsId: flatFeedsToSearchAray,
             })
           );
+          console.log('hello kity');
           this.store.dispatch(searchProducts());
         }
       });
@@ -111,6 +112,7 @@ export class SearchPageComponent implements OnInit {
         this.route.snapshot.queryParams['title']) &&
       !this.route.snapshot.queryParams['shops']
     ) {
+      console.log('hello gatsby');
       this.store.dispatch(searchProducts());
     }
   }

@@ -22,7 +22,7 @@ export const getPaginationProductPageSuccess = createAction(
 );
 
 export const setProductPageSizeSuccess = createAction(
-  '[Search API] Set Search Page Size Success',
+  '[Product API] Set Product Page Size Success',
   props<{
     count: number;
     products: Product[];
@@ -33,6 +33,6 @@ export const setProductPageSizeSuccess = createAction(
 );
 
 export const setProductPageSizeFailure = createAction(
-  '[Search API] Set Search Page Size Fail',
+  '[Product API] Set Product Page Size Fail',
   props<{ error: string }>()
 );

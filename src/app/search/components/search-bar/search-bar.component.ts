@@ -42,15 +42,6 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     }
 
     if (this.isSearchpage) {
-      //Check if currently in url is queryParam 'title' if not set queryTitle in state as empty string
-      if (this.activatedRoute.snapshot.queryParams['title']) {
-        const currentQueryTitle = this.activatedRoute.snapshot.queryParams[
-          'title'
-        ];
-        this.store.dispatch(setQueryTitle({ title: currentQueryTitle }));
-      } else {
-        this.store.dispatch(setQueryTitle({ title: '' }));
-      }
 
       //Set default form query value based on state
       this.subscription = this.currentlyQueryTitle$.subscribe(
@@ -76,11 +67,10 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
     const queryTitle = this.searchForm.value.query;
 
-    [setQueryTitle({ title: queryTitle }), searchProducts()].forEach((a) =>
-      this.store.dispatch(a)
-    );
-
     if (this.isSearchpage) {
+      [setQueryTitle({ title: queryTitle }), searchProducts()].forEach((a) =>
+        this.store.dispatch(a)
+      );
       this.router.navigate([], {
         relativeTo: this.activatedRoute,
         queryParams: { title: queryTitle, page: null },

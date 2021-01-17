@@ -10,6 +10,6 @@ export const paginationProductPage = createAction(
 );
 
 export const setProductPageSize = createAction(
-  '[Search Page] Set Search Page Size',
+  '[Product Page] Set Product Page Size',
   props<{ pageSize: number }>()
 );
