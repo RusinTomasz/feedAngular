@@ -1,16 +1,10 @@
+import { Observable } from 'rxjs';
 import { take, map } from 'rxjs/operators';
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
 /* NgRx*/
 import { State } from './../../../state/app.state';
 import { Store } from '@ngrx/store';
-import {
-  getNextPage,
-  getPrevPage,
-  getCurrentPage,
-  getPageSize,
-} from './../../../product/state/index';
-import { ProductPageActions } from 'src/app/product/state/actions';
 
 @Component({
   selector: 'app-custom-pagination',
@@ -23,26 +17,23 @@ export class CustomPaginationComponent implements OnInit {
 
   constructor(private store: Store<State>) {}
 
-  nextPage$ = this.store.select(getNextPage);
-  prevPage$ = this.store.select(getPrevPage);
-  currentPage$ = this.store.select(getCurrentPage);
-  pageSize$ = this.store.select(getPageSize);
+  @Input('currentPage') currentPage$: Observable<any>;
+  @Input('nextPage') nextPage$: Observable<any>;
+  @Input('prevPage') prevPage$: Observable<any>;
+  @Input('pageSize') pageSize$: Observable<any>;
+  @Input('changePageAction') changePageAction: any;
+
   selectedpageSize = 16;
 
   ngOnInit(): void {}
 
   nextPage(): void {
-    this.store
-      .select(getCurrentPage)
+    this.currentPage$
       .pipe(
         take(1),
         map((currentPage) => +currentPage + 1)
       )
-      .subscribe((page) =>
-        this.store.dispatch(
-          ProductPageActions.paginationProductPage({ pageNumber: page })
-        )
-      );
+      .subscribe((page) => this.store.dispatch(this.changePageAction(page)));
   }
 
   preventDefault(event): void {
@@ -50,17 +41,12 @@ export class CustomPaginationComponent implements OnInit {
   }
 
   previousPage(): void {
-    this.store
-      .select(getCurrentPage)
+    this.currentPage$
       .pipe(
         take(1),
         map((currentPage) => +currentPage - 1)
       )
-      .subscribe((page) =>
-        this.store.dispatch(
-          ProductPageActions.paginationProductPage({ pageNumber: page })
-        )
-      );
+      .subscribe((page) => this.store.dispatch(this.changePageAction(page)));
   }
 
   updatePageSize(pageSize: Number): void {

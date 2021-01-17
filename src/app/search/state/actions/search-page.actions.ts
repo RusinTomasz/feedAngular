@@ -42,4 +42,7 @@ export const setQueryTitle = createAction(
 
 /* Search products */
 
-export const searchProducts = createAction('[Search Page] Search Products');
+export const searchProducts = createAction(
+  '[Search Page] Search Products',
+  (currentPage: number = 1) => ({ currentPage })
+);

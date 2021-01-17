@@ -26,7 +26,7 @@ export class SearchService {
     this.store.dispatch(SearchPageActions.dectivateFilterSidenav());
   }
 
-  searchProducts(pageNumber: number = 1) {
+  searchProducts(currentPage: number) {
     //Get pageSize
     // console.log('currentPage: ' + pageNumber);
     const pageSize = 16;
@@ -35,6 +35,8 @@ export class SearchService {
       take(1),
       map((queryParams) => {
         let paramsObj = new HttpParams();
+        paramsObj = paramsObj.append('page', currentPage.toString());
+        paramsObj = paramsObj.append('size', pageSize.toString());
 
         if (queryParams.queryTitle) {
           paramsObj = paramsObj.append('title', queryParams.queryTitle);

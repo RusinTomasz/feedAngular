@@ -83,12 +83,12 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     if (this.isSearchpage) {
       this.router.navigate([], {
         relativeTo: this.activatedRoute,
-        queryParams: { title: queryTitle },
+        queryParams: { title: queryTitle, page: null },
         queryParamsHandling: 'merge',
       });
     } else {
       this.router.navigate(['/szukaj'], {
-        queryParams: { title: queryTitle },
+        queryParams: { title: queryTitle, page: null },
         queryParamsHandling: 'merge',
       });
     }

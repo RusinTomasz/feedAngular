@@ -43,31 +43,6 @@ export const productReducer = createReducer<ProductState>(
   initialState,
 
   on(
-    ProductPageActions.getProducts,
-    (state): ProductState => {
-      return {
-        ...state,
-        isLoading: true,
-      };
-    }
-  ),
-  on(
-    ProductApiActions.getProductsSuccess,
-    (state, action): ProductState => {
-      return {
-        ...state,
-        products: {
-          count: action.count,
-          rows: action.products,
-          nextPage: action.nextPage,
-          prevPage: action.prevPage,
-        },
-        errors: { ...state.errors, getProductsError: '' },
-        isLoading: false,
-      };
-    }
-  ),
-  on(
     ProductApiActions.getProductsFailure,
     (state, action): ProductState => {
       return {

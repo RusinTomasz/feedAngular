@@ -21,34 +21,12 @@ export class ProductEffects {
     private productService: ProductService
   ) {}
 
-  getProducts$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(ProductPageActions.getProducts),
-      concatMap(() =>
-        this.productService.getProducts().pipe(
-          map((results: { products: ProductApiResponse }) => results.products),
-          tap((results: ProductApiResponse) => console.log(results)),
-          map((results: ProductApiResponse) =>
-            ProductApiActions.getProductsSuccess({
-              count: results.count,
-              products: results.rows,
-              nextPage: results.nextPage,
-              prevPage: results.prevPage,
-            })
-          ),
-          catchError((error) =>
-            of(ProductApiActions.getProductsFailure({ error }))
-          )
-        )
-      )
-    );
-  });
 
   getPaginationProductPage$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ProductPageActions.paginationProductPage),
       concatMap((action) =>
-        this.productService.getProducts(+action.pageNumber).pipe(
+        this.productService.getProducts(+action.currentPage).pipe(
           map((results: { products: ProductApiResponse }) => results.products),
           tap((results: ProductApiResponse) => console.log(results)),
           map((results: ProductApiResponse) =>
@@ -57,7 +35,7 @@ export class ProductEffects {
               products: results.rows,
               nextPage: results.nextPage,
               prevPage: results.prevPage,
-              currentPage: +action.pageNumber,
+              currentPage: +action.currentPage,
             })
           ),
           catchError((error) =>

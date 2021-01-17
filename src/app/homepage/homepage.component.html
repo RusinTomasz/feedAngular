@@ -97,6 +97,12 @@
     </div>
   </div>
   <div class="homepage-pagination-wrapper">
-    <app-custom-pagination></app-custom-pagination>
+    <app-custom-pagination
+      [currentPage]="currentPage$"
+      [nextPage]="nextPage$"
+      [prevPage]="prevPage$"
+      [pageSize]="pageSize$"
+      [changePageAction]="changePageAction"
+    ></app-custom-pagination>
   </div>
 </div>

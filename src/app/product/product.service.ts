@@ -15,9 +15,7 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
-  getProducts(pageNumber: number = 1) {
-    //Get pageSize
-    console.log('currentPage: ' + pageNumber);
+  getProducts(pageNumber: Number) {
     const pageSize = 16;
 
     let url = this.projectsUrl + '?page=' + pageNumber + '&size=' + pageSize;

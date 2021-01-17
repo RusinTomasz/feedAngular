@@ -28,7 +28,7 @@ export class SearchEffects {
     return this.actions$.pipe(
       ofType(SearchPageActions.searchProducts),
       concatMap((action) =>
-        this.searchService.searchProducts().pipe(
+        this.searchService.searchProducts(action.currentPage).pipe(
           map(
             (results: { pagnatedSearchResults: ProductApiResponse }) =>
               results.pagnatedSearchResults
@@ -40,7 +40,7 @@ export class SearchEffects {
               products: results.rows,
               nextPage: results.nextPage,
               prevPage: results.prevPage,
-              currentPage: 1,
+              currentPage: action.currentPage,
             })
           ),
           catchError((error) => {

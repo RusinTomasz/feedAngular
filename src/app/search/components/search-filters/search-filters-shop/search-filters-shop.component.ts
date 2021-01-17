@@ -51,6 +51,7 @@ export class SearchFiltersShopComponent implements OnInit {
     ].forEach((a) => this.store.dispatch(a));
 
     const queryParams: any = { shops: null };
+    queryParams.page = null;
 
     this.router.navigate([], {
       relativeTo: this.activatedRoute,
@@ -99,6 +100,7 @@ export class SearchFiltersShopComponent implements OnInit {
     ].forEach((a) => this.store.dispatch(a));
 
     const queryParams: any = {};
+    queryParams.page = null;
 
     if (activeShopsIds.length) {
       queryParams.shops = JSON.stringify(activeShopsIds);

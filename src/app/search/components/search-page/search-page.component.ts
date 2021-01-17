@@ -16,6 +16,9 @@ import {
   getSearchLoadingStatus,
   getSearchProducts,
   getSearchPageSize,
+  getSearchCurrentPage,
+  getSearchNextPage,
+  getSearchPrevPage,
 } from './../../state/index';
 
 @Component({
@@ -27,6 +30,13 @@ export class SearchPageComponent implements OnInit {
   isLoading$ = this.store.select(getSearchLoadingStatus);
   products$ = this.store.select(getSearchProducts);
   numbers: number[];
+
+  currentPage$ = this.store.select(getSearchCurrentPage);
+  nextPage$ = this.store.select(getSearchNextPage);
+  prevPage$ = this.store.select(getSearchPrevPage);
+  pageSize$ = this.store.select(getSearchCurrentPage);
+  changePageAction = searchProducts;
+
 
   constructor(private store: Store<State>, private route: ActivatedRoute) {}
 

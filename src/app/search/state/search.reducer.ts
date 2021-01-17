@@ -150,6 +150,7 @@ export const searchReducer = createReducer<SearchState>(
           nextPage: action.nextPage,
           prevPage: action.prevPage,
         },
+        pagination: { ...state.pagination, currentPage: action.currentPage },
         errors: { ...state.errors, searchProductsError: '' },
         isLoading: false,
       };

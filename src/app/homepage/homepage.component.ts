@@ -9,10 +9,15 @@ import {
   getProducts,
   getPageSize,
   getPrductsLoadingStatus,
+  getCurrentPage,
+  getNextPage,
+  getPrevPage,
 } from './../product/state/index';
 
 /* RxJS */
 import { take } from 'rxjs/operators';
+
+/* Test */
 
 @Component({
   selector: 'app-homepage',
@@ -23,6 +28,13 @@ export class HomepageComponent implements OnInit {
   // errorMessage$ = this.store.select(getLoginError);
   isLoading$ = this.store.select(getPrductsLoadingStatus);
   products$ = this.store.select(getProducts);
+
+  currentPage$ = this.store.select(getCurrentPage);
+  nextPage$ = this.store.select(getNextPage);
+  prevPage$ = this.store.select(getPrevPage);
+  pageSize$ = this.store.select(getPageSize);
+  changePageAction = ProductPageActions.paginationProductPage;
+
   numbers: number[];
   constructor(private store: Store<State>, private route: ActivatedRoute) {}
 
@@ -40,12 +52,10 @@ export class HomepageComponent implements OnInit {
     if (this.route.snapshot.queryParams['page']) {
       const currentPaginatedPage = this.route.snapshot.queryParams['page'];
       this.store.dispatch(
-        ProductPageActions.paginationProductPage({
-          pageNumber: currentPaginatedPage,
-        })
+        ProductPageActions.paginationProductPage(currentPaginatedPage)
       );
     } else {
-      this.store.dispatch(ProductPageActions.getProducts());
+      this.store.dispatch(ProductPageActions.paginationProductPage());
     }
   }
 }

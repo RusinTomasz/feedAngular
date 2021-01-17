@@ -20,7 +20,10 @@
 
   <a
     *ngIf="(prevPage$ | async) && currentPage$ | async as currentPage"
-    [queryParams]="currentPage != 2 ? { page: +currentPage - 1 } : false"
+    [queryParams]="
+      currentPage != 2 ? { page: +currentPage - 1 } : { page: null }
+    "
+    queryParamsHandling="merge"
     [routerLink]=""
     mat-button
     class="btn btn-outline"
@@ -32,6 +35,7 @@
   <a
     *ngIf="!(prevPage$ | async)"
     [routerLink]=""
+    queryParamsHandling="merge"
     mat-button
     class="btn btn-outline disabled"
     (click)="preventDefault($event)"
@@ -44,6 +48,7 @@
     mat-button
     [routerLink]=""
     [queryParams]="{ page: +currentPage + 1 }"
+    queryParamsHandling="merge"
     class="btn btn-outline"
     (click)="nextPage()"
   >
@@ -54,6 +59,7 @@
     *ngIf="!(nextPage$ | async)"
     [routerLink]=""
     [queryParams]="{ page: (currentPage$ | async) }"
+    queryParamsHandling="merge"
     mat-button
     class="btn btn-outline disabled"
     (click)="preventDefault($event)"
