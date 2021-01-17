@@ -31,11 +31,6 @@
     </div>
     <div class="navbar-element">
       <ul class="main-nav" fxLayout="row" fxLayoutAlign="flex-end center">
-        <li class="main-nav-item">
-          <a class="main-nav-item-link" [routerLink]="'/new-event'" mat-button
-            >Sklepy</a
-          >
-        </li>
         <li *ngIf="!(authUser$ | async)" class="main-nav-item">
           <a class="main-nav-item-link" [routerLink]="'/login'" mat-button
             >Zaloguj się</a
