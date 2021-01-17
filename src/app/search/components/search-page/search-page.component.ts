@@ -42,6 +42,8 @@ export class SearchPageComponent implements OnInit {
   constructor(private store: Store<State>, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
+    let currentPage = 1;
+
     this.store
       .select(getSearchPageSize)
       .pipe(take(1))
@@ -53,9 +55,7 @@ export class SearchPageComponent implements OnInit {
       );
 
     if (this.route.snapshot.queryParams['page']) {
-      // this.searchQueryParams.currentPaginatedPage = this.route.snapshot.queryParams[
-      //   'page'
-      // ];
+      currentPage = this.route.snapshot.queryParams['page'];
     }
 
     if (this.route.snapshot.queryParams['title']) {
@@ -102,7 +102,7 @@ export class SearchPageComponent implements OnInit {
             })
           );
           console.log('hello kity');
-          this.store.dispatch(searchProducts());
+          this.store.dispatch(searchProducts(currentPage));
         }
       });
     }
@@ -113,7 +113,7 @@ export class SearchPageComponent implements OnInit {
       !this.route.snapshot.queryParams['shops']
     ) {
       console.log('hello gatsby');
-      this.store.dispatch(searchProducts());
+      this.store.dispatch(searchProducts(currentPage));
     }
   }
 
