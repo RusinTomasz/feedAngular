@@ -34,9 +34,8 @@ export class SearchPageComponent implements OnInit {
   currentPage$ = this.store.select(getSearchCurrentPage);
   nextPage$ = this.store.select(getSearchNextPage);
   prevPage$ = this.store.select(getSearchPrevPage);
-  pageSize$ = this.store.select(getSearchCurrentPage);
+  pageSize$ = this.store.select(getSearchPageSize);
   changePageAction = searchProducts;
-
 
   constructor(private store: Store<State>, private route: ActivatedRoute) {}
 

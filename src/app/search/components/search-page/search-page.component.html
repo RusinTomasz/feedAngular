@@ -65,61 +65,10 @@
           </h3>
         </div>
 
-        <div
-          class="skeleton-wrapper"
-          fxLayout="row wrap"
-          fxLayoutAlign="space-between"
-          *ngIf="!(products$ | async)?.length && (isLoading$ | async)"
-        >
-          <div
-            class="product product-skeleton"
-            fxFlex="25"
-            fxLayout="column"
-            dir="ltr"
-            fxLayoutAlign="space-between flex-start"
-            *ngFor="let number of numbers"
-          >
-            <div class="product-top-section" fxFlex="100">
-              <ngx-skeleton-loader
-                count="1"
-                [theme]="{
-                  height: '180px'
-                }"
-                appearance="line"
-              ></ngx-skeleton-loader>
-              <ngx-skeleton-loader
-                count="1"
-                [theme]="{
-                  height: '80px'
-                }"
-                appearance="line"
-              ></ngx-skeleton-loader>
-            </div>
-            <div
-              class="product-bottom-section"
-              fxLayout="row wrap"
-              fxLayoutAlign="space-between flex-end"
-              fxFlex="100"
-            >
-              <ngx-skeleton-loader
-                count="1"
-                [theme]="{
-                  height: '36px',
-                  width: '85px'
-                }"
-                appearance="line"
-              ></ngx-skeleton-loader>
-              <ngx-skeleton-loader
-                count="1"
-                [theme]="{
-                  height: '36px',
-                  width: '78px'
-                }"
-                appearance="line"
-              ></ngx-skeleton-loader>
-            </div>
-          </div>
-        </div>
+        <app-skeleton
+          *ngIf="isLoading$ | async"
+          [pageSize]="pageSize$"
+        ></app-skeleton>
         <div
           class="homepage-pagination-wrapper"
           *ngIf="(nextPage$ | async) || (prevPage$ | async)"

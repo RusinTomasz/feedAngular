@@ -1,4 +1,3 @@
-import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 
@@ -9,6 +8,7 @@ import { LayoutModule } from './../layout/layout.module';
 import { SearchBarModule } from './components/search-bar/search-bar.module';
 import { PaginationModule } from './../pagination/pagination.module';
 import { SharedPipesModule } from './../pipes/sharedPipes.module';
+import { SkeletonModule } from './../skeleton/skeleton.module';
 
 /* Material */
 
@@ -55,7 +55,7 @@ const routes = [
     LayoutModule,
     PaginationModule,
     SearchBarModule,
-    NgxSkeletonLoaderModule,
+    SkeletonModule,
     SharedPipesModule,
     //Material
     MatFormFieldModule,

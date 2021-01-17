@@ -1,0 +1,29 @@
+.skeleton-wrapper {
+  .product {
+    padding: 25px;
+    .product-top-section {
+      width: 100%;
+    }
+    .product-title {
+      color: color(gray);
+      font-weight: 500;
+      margin-top: 20px;
+    }
+    .product-image-wrapper {
+      .product-image {
+        margin: auto;
+        max-width: 100%;
+        display: block;
+      }
+    }
+    .product-bottom-section {
+      width: 100%;
+    }
+    .product-price {
+      color: color(orangeDark);
+      font-weight: 500;
+      font-size: 18px;
+      margin: 0 0 8px;
+    }
+  }
+}
