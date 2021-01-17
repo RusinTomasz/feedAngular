@@ -9,10 +9,10 @@
   .filtr-panel-container {
     position: fixed;
     width: 320px;
-    height: calc(100vh - 56.56px);
+    height: calc(100vh - 56.25px);
     //   height: calc(((100vh - 56.56px) - 344px));
     bottom: 344px;
-    top: 56.56px;
+    top: 56.25px;
     background-color: color(backgroundGray);
     .filter-panel-title {
       padding-top: 46px;

@@ -1,3 +1,4 @@
+import { LayoutModule } from './../layout/layout.module';
 import { NgModule } from '@angular/core';
 import { ThemeSharedModule } from './../shared.module';
 import { RouterModule } from '@angular/router';
@@ -64,6 +65,7 @@ const routes = [
     RouterModule.forChild(routes),
     //Shared
     ThemeSharedModule,
+    LayoutModule,
     //NgRx
     StoreModule.forFeature('auth', authReducer),
     EffectsModule.forFeature([AuthEffects]),
