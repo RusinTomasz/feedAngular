@@ -6,11 +6,20 @@
       <app-search-bar></app-search-bar>
 
       <div class="container">
-        <h2 class="search-page-subtitle">Znalezione produkty</h2>
+        <h2
+          *ngIf="!(isLoading$ | async) && (products$ | async).length"
+          class="search-page-subtitle"
+        >
+          Znalezione produkty
+        </h2>
 
         <div
           class="products-wrapper"
-          *ngIf="!(isLoading$ | async) && products$ | async as products"
+          *ngIf="
+            !(isLoading$ | async) &&
+            (products$ | async).length &&
+            (products$ | async) as products
+          "
           fxLayout="row wrap"
         >
           <div
@@ -44,6 +53,16 @@
               >
             </div>
           </div>
+        </div>
+
+        <div
+          class="no-results-wrapper"
+          *ngIf="!(products$ | async)?.length && !(isLoading$ | async)"
+        >
+          <h3 class="no-result-title">
+            Ups! wygląda na to, że nie mamy tego czego szukasz. Spróbuj wyszukać
+            coś innego.
+          </h3>
         </div>
 
         <div
@@ -101,13 +120,16 @@
             </div>
           </div>
         </div>
-        <div class="homepage-pagination-wrapper">
+        <div
+          class="homepage-pagination-wrapper"
+          *ngIf="(nextPage$ | async) || (prevPage$ | async)"
+        >
           <app-custom-pagination
-          [currentPage]="currentPage$"
-          [nextPage]="nextPage$"
-          [prevPage]="prevPage$"
-          [pageSize]="pageSize$"
-          [changePageAction]="changePageAction"
+            [currentPage]="currentPage$"
+            [nextPage]="nextPage$"
+            [prevPage]="prevPage$"
+            [pageSize]="pageSize$"
+            [changePageAction]="changePageAction"
           ></app-custom-pagination>
         </div>
       </div>

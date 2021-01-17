@@ -90,7 +90,7 @@ export class SearchFiltersPriceComponent implements OnInit, OnDestroy {
     let priceTo: number = this.filterPriceForm.value.priceTo;
 
     if (!priceFrom && priceTo) {
-      priceFrom = 0;
+      priceFrom = 1;
     }
 
     if (!priceTo && priceFrom) {

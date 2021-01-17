@@ -9,10 +9,24 @@
     margin-top: 56.56px;
     .search-page-subtitle {
       margin-top: 30px;
+      margin-left: 5px;
       font-size: 32px;
       font-weight: 500;
       color: #1e0a3c;
     }
+    .no-results-wrapper {
+      margin-top: 30px;
+      .no-result-title {
+        margin-left: 5px;
+        font-size: 24px;
+        line-height: 32px;
+        letter-spacing: 0.25px;
+        max-width: 600px;
+        font-weight: 500;
+        color: #1e0a3c;
+      }
+    }
+
     .products-wrapper,
     .skeleton-wrapper {
       .product {
