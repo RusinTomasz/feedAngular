@@ -1,3 +1,4 @@
+import { Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { take, map } from 'rxjs/operators';
 import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
@@ -13,17 +14,20 @@ import { Store } from '@ngrx/store';
   encapsulation: ViewEncapsulation.None,
 })
 export class CustomPaginationComponent implements OnInit {
-  pageSizes: Number[] = [16, 25, 55];
+  pageSizes: Number[] = [8, 16, 24];
 
-  constructor(private store: Store<State>) {}
+  constructor(
+    private store: Store<State>,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   @Input('currentPage') currentPage$: Observable<any>;
   @Input('nextPage') nextPage$: Observable<any>;
   @Input('prevPage') prevPage$: Observable<any>;
   @Input('pageSize') pageSize$: Observable<any>;
   @Input('changePageAction') changePageAction: any;
-
-  selectedpageSize = 16;
+  @Input('changePageSizeAction') changePageSizeAction: any;
 
   ngOnInit(): void {}
 
@@ -50,6 +54,11 @@ export class CustomPaginationComponent implements OnInit {
   }
 
   updatePageSize(pageSize: Number): void {
-    console.log(pageSize);
+    this.store.dispatch(this.changePageSizeAction({ pageSize }));
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: { page: null },
+      queryParamsHandling: 'merge',
+    });
   }
 }

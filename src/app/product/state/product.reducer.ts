@@ -77,5 +77,44 @@ export const productReducer = createReducer<ProductState>(
         isLoading: false,
       };
     }
+  ),
+  on(
+    ProductPageActions.setProductPageSize,
+    (state, action): ProductState => {
+      return {
+        ...state,
+        pagination: {
+          ...state.pagination,
+          pageSize: action.pageSize,
+        },
+      };
+    }
+  ),
+  on(
+    ProductApiActions.setProductPageSizeSuccess,
+    (state, action): ProductState => {
+      return {
+        ...state,
+        products: {
+          count: action.count,
+          rows: action.products,
+          nextPage: action.nextPage,
+          prevPage: action.prevPage,
+        },
+        pagination: { ...state.pagination, currentPage: action.currentPage },
+        errors: { ...state.errors, getProductsError: '' },
+        isLoading: false,
+      };
+    }
+  ),
+  on(
+    ProductApiActions.setProductPageSizeFailure,
+    (state, action): ProductState => {
+      return {
+        ...state,
+        errors: { ...state.errors, getProductsError: action.error },
+        isLoading: false,
+      };
+    }
   )
 );

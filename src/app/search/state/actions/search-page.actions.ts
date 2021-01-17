@@ -35,6 +35,11 @@ export const setPriceRange = createAction(
   props<{ priceFrom: number; priceTo: number }>()
 );
 
+export const setSearchPageSize = createAction(
+  '[Search Page] Set Search Page Size',
+  props<{ pageSize: number }>()
+);
+
 export const setQueryTitle = createAction(
   '[Search Page] Set Query Title',
   props<{ title: string }>()

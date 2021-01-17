@@ -51,4 +51,32 @@ export class SearchEffects {
       )
     );
   });
+
+  setSearchPageSize$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(SearchPageActions.setSearchPageSize),
+      concatMap(() =>
+        this.searchService.searchProducts(1).pipe(
+          map(
+            (results: { pagnatedSearchResults: ProductApiResponse }) =>
+              results.pagnatedSearchResults
+          ),
+          tap((results: ProductApiResponse) => console.log(results)),
+          map((results: ProductApiResponse) =>
+            SearchApiActions.setSearchPageSizeSuccess({
+              count: results.count,
+              products: results.rows,
+              nextPage: results.nextPage,
+              prevPage: results.prevPage,
+              currentPage: 1,
+            })
+          ),
+          catchError((error) => {
+            console.log(error);
+            return of(SearchApiActions.setSearchPageSizeFailure({ error }));
+          })
+        )
+      )
+    );
+  });
 }

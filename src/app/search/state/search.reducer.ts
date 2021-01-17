@@ -1,3 +1,4 @@
+import { setSearchPageSize } from './actions/search-page.actions';
 import { Product } from './../../product/product';
 /* NgRx */
 import { createReducer, on } from '@ngrx/store';
@@ -115,6 +116,45 @@ export const searchReducer = createReducer<SearchState>(
           ...state.filters,
           priceRange: { priceFrom: action.priceFrom, priceTo: action.priceTo },
         },
+      };
+    }
+  ),
+  on(
+    SearchPageActions.setSearchPageSize,
+    (state, action): SearchState => {
+      return {
+        ...state,
+        pagination: {
+          ...state.pagination,
+          pageSize: action.pageSize,
+        },
+      };
+    }
+  ),
+  on(
+    SearchApiActions.setSearchPageSizeSuccess,
+    (state, action): SearchState => {
+      return {
+        ...state,
+        products: {
+          count: action.count,
+          rows: action.products,
+          nextPage: action.nextPage,
+          prevPage: action.prevPage,
+        },
+        pagination: { ...state.pagination, currentPage: action.currentPage },
+        errors: { ...state.errors, searchProductsError: '' },
+        isLoading: false,
+      };
+    }
+  ),
+  on(
+    SearchApiActions.setSearchPageSizeFailure,
+    (state, action): SearchState => {
+      return {
+        ...state,
+        errors: { ...state.errors, searchProductsError: action.error },
+        isLoading: false,
       };
     }
   ),

@@ -3,24 +3,41 @@ import {
   HttpClient,
   HttpHeaders,
   HttpErrorResponse,
+  HttpParams,
 } from '@angular/common/http';
 
 /* RxJs */
-import { catchError } from 'rxjs/operators';
+import { catchError, take, map, mergeMap } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+
+/* NgRx */
+import { Store } from '@ngrx/store';
+import { State } from './../state/app.state';
+import { getPageSize } from './state/index';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
   private projectsUrl = 'http://localhost:8080/products';
+  private pageSize$ = this.store.select(getPageSize);
 
-  constructor(private http: HttpClient) {}
+  constructor(private store: Store<State>, private http: HttpClient) {}
 
-  getProducts(pageNumber: Number) {
-    const pageSize = 16;
+  getProducts(currentPage: Number) {
+    return this.pageSize$.pipe(
+      take(1),
+      map((pageSize) => {
+        let paramsObj = new HttpParams();
+        paramsObj = paramsObj.append('page', currentPage.toString());
+        paramsObj = paramsObj.append('size', pageSize.toString());
 
-    let url = this.projectsUrl + '?page=' + pageNumber + '&size=' + pageSize;
-
-    return this.http.get(url).pipe(catchError(this.handleError));
+        return paramsObj;
+      }),
+      mergeMap((paramsObj) => {
+        return this.http
+          .get(this.projectsUrl, { params: paramsObj })
+          .pipe(catchError(this.handleError));
+      })
+    );
   }
 
   private handleError(errorRes: HttpErrorResponse) {

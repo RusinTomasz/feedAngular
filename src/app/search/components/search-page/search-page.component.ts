@@ -10,6 +10,7 @@ import {
   setPriceRange,
   setActiveShops,
   searchProducts,
+  setSearchPageSize,
 } from './../../state/actions/search-page.actions';
 import { getDomains } from './../../../domain/state/index';
 import {
@@ -36,6 +37,7 @@ export class SearchPageComponent implements OnInit {
   prevPage$ = this.store.select(getSearchPrevPage);
   pageSize$ = this.store.select(getSearchPageSize);
   changePageAction = searchProducts;
+  changePageSizeAction = setSearchPageSize;
 
   constructor(private store: Store<State>, private route: ActivatedRoute) {}
 

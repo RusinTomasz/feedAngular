@@ -34,6 +34,7 @@ export class HomepageComponent implements OnInit {
   prevPage$ = this.store.select(getPrevPage);
   pageSize$ = this.store.select(getPageSize);
   changePageAction = ProductPageActions.paginationProductPage;
+  changePageSizeAction = ProductPageActions.setProductPageSize;
 
   numbers: number[];
   constructor(private store: Store<State>, private route: ActivatedRoute) {}
