@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { State } from './../../../state/app.state';
 import { Component, OnInit } from '@angular/core';
@@ -6,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
 /* NgRx */
 import { Store } from '@ngrx/store';
 import { getLoadingStatus } from './../../../auth/state/index';
+import { paginationProductPage } from './../../../product/state/actions/product-page.actions';
 
 @Component({
   selector: 'app-navbar',
@@ -27,5 +27,9 @@ export class NavbarComponent implements OnInit {
     if (currentUrlWithoutQueryParams === '/') {
       this.isHomepage = true;
     }
+  }
+
+  goToFrontPage(): void {
+    this.store.dispatch(paginationProductPage());
   }
 }
