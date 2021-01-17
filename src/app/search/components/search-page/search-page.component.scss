@@ -26,7 +26,11 @@
         color: #1e0a3c;
       }
     }
-
+    .search-page-pagination-wrapper {
+      display: flex;
+      justify-content: flex-end;
+      padding-right: 25px;
+    }
     .products-wrapper {
       .product {
         padding: 25px;
