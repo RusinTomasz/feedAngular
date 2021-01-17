@@ -54,7 +54,7 @@ const initialState: SearchState = {
     currentPage: 1,
     pageSize: 16,
   },
-  isLoading: false,
+  isLoading: true,
 };
 
 export const searchReducer = createReducer<SearchState>(
