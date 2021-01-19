@@ -24,6 +24,7 @@ import { Store } from '@ngrx/store';
 
 @Injectable({ providedIn: 'root' })
 export class SearchService {
+  // private projectsUrl = 'http://localhost:8080/search/products';
   private projectsUrl = 'http://localhost:8080/search/products';
   private queryparams$ = this.store.select(getCurrentlyActiveFilters);
   private pageSize$ = this.store.select(getSearchPageSize);

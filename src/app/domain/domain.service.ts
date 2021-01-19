@@ -11,6 +11,7 @@ import { throwError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DomainService {
+  // private domainsUrl = 'http://localhost:8080/domain';
   private domainsUrl = 'http://localhost:8080/domain';
 
   constructor(private http: HttpClient) {}

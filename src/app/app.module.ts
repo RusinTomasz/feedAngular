@@ -1,7 +1,6 @@
 import { SearchModule } from './search/search.module';
 import { domainReducer } from './domain/state/domain.reducer';
 
-import { LayoutModule } from './layout/layout.module';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';

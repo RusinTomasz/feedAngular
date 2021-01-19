@@ -17,6 +17,7 @@ import { getPageSize } from './state/index';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
+  // private projectsUrl = 'http://localhost:8080/products';
   private projectsUrl = 'http://localhost:8080/products';
   private pageSize$ = this.store.select(getPageSize);
 

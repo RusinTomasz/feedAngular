@@ -116,8 +116,4 @@ export class SearchPageComponent implements OnInit {
       this.store.dispatch(searchProducts(currentPage));
     }
   }
-
-  filterDomain = (domain) => {
-    console.log(domain.id);
-  };
 }

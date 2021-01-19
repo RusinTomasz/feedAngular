@@ -39,6 +39,7 @@ export class AuthService {
     private http: HttpClient,
     private activatedRoute: ActivatedRoute
   ) {}
+  // http://localhost:8080/
 
   verifyAccount() {
     return this.activatedRoute.queryParams.pipe(
@@ -54,6 +55,7 @@ export class AuthService {
   resetPassword(newPass: ResetPasswordInterface) {
     const headers = this.createHeaders();
 
+    // http://localhost:8080/
     return this.activatedRoute.queryParams.pipe(
       map((params) => params['resetPassToken']),
       switchMap((resetPassToken) =>
@@ -72,6 +74,8 @@ export class AuthService {
 
   sendEmailToResetPassword(email: ForgotPasswordInterface) {
     const headers = this.createHeaders();
+    // http://localhost:8080/
+
     return this.http
       .put('http://localhost:8080/auth/forgot-password', email, {
         headers: headers,
@@ -94,6 +98,7 @@ export class AuthService {
       phoneNumber,
     };
     const headers = this.createHeaders();
+    // 'http://localhost:8080/auth/signup',
     return this.http
       .post<RegisterInterface>(
         'http://localhost:8080/auth/signup',
@@ -113,23 +118,31 @@ export class AuthService {
 
     const headers = this.createHeaders();
 
-    return this.http
-      .post<LoginInterface>('http://localhost:8080/auth/login', userToLogin, {
-        headers,
-      })
-      .pipe(
-        catchError(this.handleError),
-        tap((response) => {
-          this.handleAuthentication(
-            response.firstName,
-            response.lastName,
-            response.email,
-            response.token,
-            response.userId,
-            response.role
-          );
-        })
-      );
+    return (
+      this.http
+        // http://localhost:8080/auth/login
+
+        .post<LoginInterface>(
+          'http://localhost:8080/auth/login',
+          userToLogin,
+          {
+            headers,
+          }
+        )
+        .pipe(
+          catchError(this.handleError),
+          tap((response) => {
+            this.handleAuthentication(
+              response.firstName,
+              response.lastName,
+              response.email,
+              response.token,
+              response.userId,
+              response.role
+            );
+          })
+        )
+    );
   }
 
   private handleAuthentication(
