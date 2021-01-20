@@ -1,4 +1,6 @@
+import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
+
 import {
   HttpClient,
   HttpHeaders,
@@ -11,8 +13,7 @@ import { throwError } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class DomainService {
-  // private domainsUrl = 'http://localhost:8080/domain';
-  private domainsUrl = 'http://localhost:8080/domain';
+  private domainsUrl = `${environment.apiHost}/domain`;
 
   constructor(private http: HttpClient) {}
 

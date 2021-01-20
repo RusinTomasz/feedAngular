@@ -1,3 +1,5 @@
+import { environment } from './../../environments/environment';
+
 import { Injectable } from '@angular/core';
 import {
   HttpClient,
@@ -39,14 +41,13 @@ export class AuthService {
     private http: HttpClient,
     private activatedRoute: ActivatedRoute
   ) {}
-  // http://localhost:8080/
 
   verifyAccount() {
     return this.activatedRoute.queryParams.pipe(
       map((params) => params['token']),
       switchMap((token) =>
         this.http
-          .get(`http://localhost:8080/auth/verify-email?token=${token}`)
+          .get(`${environment.apiHost}/auth/verify-email?token=${token}`)
           .pipe(catchError(this.handleError))
       )
     );
@@ -55,13 +56,12 @@ export class AuthService {
   resetPassword(newPass: ResetPasswordInterface) {
     const headers = this.createHeaders();
 
-    // http://localhost:8080/
     return this.activatedRoute.queryParams.pipe(
       map((params) => params['resetPassToken']),
       switchMap((resetPassToken) =>
         this.http
           .put(
-            `http://localhost:8080/auth/reset-password?resetPassToken=${resetPassToken}`,
+            `${environment.apiHost}/auth/reset-password?resetPassToken=${resetPassToken}`,
             newPass,
             {
               headers: headers,
@@ -74,10 +74,9 @@ export class AuthService {
 
   sendEmailToResetPassword(email: ForgotPasswordInterface) {
     const headers = this.createHeaders();
-    // http://localhost:8080/
 
     return this.http
-      .put('http://localhost:8080/auth/forgot-password', email, {
+      .put(`${environment.apiHost}/auth/forgot-password`, email, {
         headers: headers,
       })
       .pipe(catchError(this.handleError));
@@ -98,10 +97,9 @@ export class AuthService {
       phoneNumber,
     };
     const headers = this.createHeaders();
-    // 'http://localhost:8080/auth/signup',
     return this.http
       .post<RegisterInterface>(
-        'http://localhost:8080/auth/signup',
+        `${environment.apiHost}/auth/signup`,
         userToRegister,
         {
           headers: headers,
@@ -118,31 +116,24 @@ export class AuthService {
 
     const headers = this.createHeaders();
 
-    return (
-      this.http
-        // http://localhost:8080/auth/login
+    return this.http
 
-        .post<LoginInterface>(
-          'http://localhost:8080/auth/login',
-          userToLogin,
-          {
-            headers,
-          }
-        )
-        .pipe(
-          catchError(this.handleError),
-          tap((response) => {
-            this.handleAuthentication(
-              response.firstName,
-              response.lastName,
-              response.email,
-              response.token,
-              response.userId,
-              response.role
-            );
-          })
-        )
-    );
+      .post<LoginInterface>(`${environment.apiHost}/auth/login`, userToLogin, {
+        headers,
+      })
+      .pipe(
+        catchError(this.handleError),
+        tap((response) => {
+          this.handleAuthentication(
+            response.firstName,
+            response.lastName,
+            response.email,
+            response.token,
+            response.userId,
+            response.role
+          );
+        })
+      );
   }
 
   private handleAuthentication(

@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import {
   HttpClient,
@@ -17,8 +18,7 @@ import { getPageSize } from './state/index';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
-  // private projectsUrl = 'http://localhost:8080/products';
-  private projectsUrl = 'http://localhost:8080/products';
+  private projectsUrl = `${environment.apiHost}/products`;
   private pageSize$ = this.store.select(getPageSize);
 
   constructor(private store: Store<State>, private http: HttpClient) {}

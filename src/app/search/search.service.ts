@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { getCurrentlyActiveFilters, getSearchPageSize } from './state/index';
 import { Injectable } from '@angular/core';
 import { SearchPageActions } from 'src/app/search/state/actions';
@@ -24,8 +25,7 @@ import { Store } from '@ngrx/store';
 
 @Injectable({ providedIn: 'root' })
 export class SearchService {
-  // private projectsUrl = 'http://localhost:8080/search/products';
-  private projectsUrl = 'http://localhost:8080/search/products';
+  private projectsUrl = `${environment.apiHost}/search/products`;
   private queryparams$ = this.store.select(getCurrentlyActiveFilters);
   private pageSize$ = this.store.select(getSearchPageSize);
 
