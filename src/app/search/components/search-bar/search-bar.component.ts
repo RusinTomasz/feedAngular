@@ -42,7 +42,6 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     }
 
     if (this.isSearchpage) {
-
       //Set default form query value based on state
       this.subscription = this.currentlyQueryTitle$.subscribe(
         (currentlyQueryTitle) => {
@@ -68,19 +67,35 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     const queryTitle = this.searchForm.value.query;
 
     if (this.isSearchpage) {
-      [setQueryTitle({ title: queryTitle }), searchProducts()].forEach((a) =>
-        this.store.dispatch(a)
-      );
-      this.router.navigate([], {
-        relativeTo: this.activatedRoute,
-        queryParams: { title: queryTitle, page: null },
-        queryParamsHandling: 'merge',
-      });
+      if (!queryTitle) {
+        this.store.dispatch(searchProducts());
+        this.router.navigate([], {
+          relativeTo: this.activatedRoute,
+          queryParams: { title: null, page: null },
+          queryParamsHandling: 'merge',
+        });
+      } else {
+        [setQueryTitle({ title: queryTitle }), searchProducts()].forEach((a) =>
+          this.store.dispatch(a)
+        );
+        this.router.navigate([], {
+          relativeTo: this.activatedRoute,
+          queryParams: { title: queryTitle, page: null },
+          queryParamsHandling: 'merge',
+        });
+      }
     } else {
-      this.router.navigate(['/szukaj'], {
-        queryParams: { title: queryTitle, page: null },
-        queryParamsHandling: 'merge',
-      });
+      if (!queryTitle) {
+        this.router.navigate(['/szukaj'], {
+          queryParams: { title: null, page: null },
+          queryParamsHandling: 'merge',
+        });
+      } else {
+        this.router.navigate(['/szukaj'], {
+          queryParams: { title: queryTitle, page: null },
+          queryParamsHandling: 'merge',
+        });
+      }
     }
   }
 }
