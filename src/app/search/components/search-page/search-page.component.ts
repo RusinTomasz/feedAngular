@@ -107,11 +107,7 @@ export class SearchPageComponent implements OnInit {
       });
     }
 
-    if (
-      (this.route.snapshot.queryParams['priceFrom'] ||
-        this.route.snapshot.queryParams['title']) &&
-      !this.route.snapshot.queryParams['shops']
-    ) {
+    if (!this.route.snapshot.queryParams['shops']) {
       console.log('hello gatsby');
       this.store.dispatch(searchProducts(currentPage));
     }

@@ -68,7 +68,9 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
     if (this.isSearchpage) {
       if (!queryTitle) {
-        this.store.dispatch(searchProducts());
+        [setQueryTitle({ title: queryTitle }), searchProducts()].forEach((a) =>
+          this.store.dispatch(a)
+        );
         this.router.navigate([], {
           relativeTo: this.activatedRoute,
           queryParams: { title: null, page: null },
